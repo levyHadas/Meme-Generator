@@ -11,7 +11,9 @@ function renderGallery() {
     if (!memes.length) strHtml += '<h2>no memes for display<h2>'
     memes.forEach(meme => {
         strHtml += `
+        <div class="shadow">
         <div class="gallery-item" style="background-image: url(${meme.src});" data-id="${meme.id}" onclick="onGalleryItemClicked(this)"></div>
+        </div>
         `
     });
     document.querySelector('.img-gallery').innerHTML = strHtml;
@@ -50,5 +52,5 @@ function onCloseModal() {
 }
 
 function onDisplaySearch() {
-    document.querySelector('.search-bar').classList.remove('hidden');
+    document.querySelector('.search-bar').classList.toggle('hidden');
 }

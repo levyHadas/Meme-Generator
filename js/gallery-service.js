@@ -23,6 +23,15 @@ function createMemes() {
     createMeme('Dr. Evil Quotes', 'img/meme-imgs/dr_evil.jpg', 'funny')
     createMeme('Look At All These', 'img/meme-imgs/look_at_all_these.jpg', 'funny', 'meme')
     createMeme('Ancient Aliens', 'img/meme-imgs/ancient_aliens.jpg', 'funny')
+    createMeme('African Kids Dancing', 'img/meme-imgs/african_kids_dancing.jpg', 'funny')
+    createMeme('Evil Toddler', 'img/meme-imgs/evil_toddler.jpg', 'funny', 'meme')
+    createMeme('Hecht', 'img/meme-imgs/hecht.jpg', 'funny')
+    createMeme('Leo', 'img/meme-imgs/leo.jpg', 'funny')
+    createMeme('Laughing Obama', 'img/meme-imgs/obama.jpg', 'funny', 'meme')
+    createMeme('One Does Not Simply', 'img/meme-imgs/one_does_not_simply.jpg', 'funny')
+    createMeme('Oprah', 'img/meme-imgs/oprah.jpg', 'funny')
+    createMeme('Patrick', 'img/meme-imgs/patrick.jpg', 'funny', 'meme')
+    createMeme('Putin', 'img/meme-imgs/putin.jpg', 'funny')
 }
 
 function getMemesForDisplay() {

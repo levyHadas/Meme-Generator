@@ -14,12 +14,13 @@
         <h1 class="main-title">Meme Generator</h1>
     </header>
     <section class="gallery main">
-        <div class="top-bar">
+        <div class="top-bar flex space-between align-center">
             <div class="search-bar hidden">
-                <button class="search-btn" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
+                <button class="search-btn btn" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
                 <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes">
             </div>
-            <button class="add-meme" onclick="onAddMeme()">Add Meme</button>
+            <h2>Select Meme Image</h2>
+            <button class="add-meme btn" onclick="onAddMeme()"><i class="fas fa-plus"></i></button>
         </div>
         <div class="modal add-meme hide">
             <form class="flex column align-center space-around" onsubmit="onSubmitNewMeme(event, this)">
