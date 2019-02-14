@@ -104,10 +104,11 @@ section.main {
 }
 
 .canvas-container {
-    width: 80%;
+    width: 90%;
     height: 80vw;
-    max-width: 700px;
+    max-width: 600px;
     max-height: 700px;
+    margin: 0 auto;
 }
 
 .meme-text {
@@ -115,4 +116,8 @@ section.main {
     color: black;
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
+}
+
+.gallery {
+    display: none
 }

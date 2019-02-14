@@ -1,6 +1,7 @@
-var gCurrTxtSets = {color: 'black',
-                        font: 'Cursive',
-                        size: '2rem'}
+var gCurrTxtSets = {img: 'img/meme-imgs/patrick.jpg',
+                    color: 'black',
+                    font: 'Cursive',
+                    size: '2rem'}
 
 
 
