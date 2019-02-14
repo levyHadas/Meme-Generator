@@ -1,4 +1,4 @@
-var gCurrTxtSets = {img: 'img/meme-imgs/patrick.jpg',
+var gCanvasState = {img: 'img/meme-imgs/patrick.jpg',
                     color: 'black',
                     font: 'Cursive',
                     size: '2rem'}
@@ -6,10 +6,21 @@ var gCurrTxtSets = {img: 'img/meme-imgs/patrick.jpg',
 
 
 function setCurrTxtSets(property, value) {
-    if (property !== 'size') gCurrTxtSets[property] = value
-    else  gCurrTxtSets[property] = value + 'px'
+    if (property !== 'size') gCanvasState[property] = value
+    else  gCanvasState[property] = value + 'px'
 }
 
-function getCurrTxtSets(property) {
-    return gCurrTxtSets[property]
+function getCanvasState(property) {
+    return gCanvasState[property]
+}
+
+function getMeme(id){
+
+}
+
+function resetCanvasState() {
+    gCanvasState = {img: 'img/meme-imgs/patrick.jpg',
+                    color: 'black',
+                    font: 'Cursive',
+                    size: '2rem'}
 }

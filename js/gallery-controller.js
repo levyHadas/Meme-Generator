@@ -21,7 +21,7 @@ function renderGallery() {
 
 function onGalleryItemClicked(elItem) {
     var meme = getMemeById(elItem.dataset.id);
-    openEditor(meme);
+    initEditor(meme);
 }
 
 function onSearchInput(val) {
@@ -54,3 +54,4 @@ function onCloseModal() {
 function onDisplaySearch() {
     document.querySelector('.search-bar').classList.toggle('hidden');
 }
+
