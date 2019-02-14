@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>Meme Generator</title>
+</head>
+
+<body onload="init()">
     <header>
         <h1>Meme Generator</h1>
     </header>
@@ -17,10 +21,11 @@
         <div class="canvas-container"></div>
         <div class="control-panel"></div>
     </section>
-</head>
-<body>
-    <script src="js/meme-service.js"></script>
     <script src="js/meme-utils.js"></script>
-    <script src="js/meme-controller.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+    <script src="js/editor-service.js"></script>
+    <script src="js/editor-controller.js"></script>
 </body>
+
 </html>
