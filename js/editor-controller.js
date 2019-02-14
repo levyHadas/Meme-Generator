@@ -98,6 +98,14 @@ function addTextToCanvas() {
     gCtx.fillText(txt, xLocation, yLocation);
 }
 
+function onBackToGallery() {
+    document.querySelector('section.editor').classList.add('hide');
+    document.querySelector('section.gallery').classList.remove('hide');
+}
+
+function onShare() {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}`)
+}
 
 // reset input text when new pic
 // add more text

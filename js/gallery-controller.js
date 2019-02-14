@@ -20,6 +20,8 @@ function renderGallery() {
 }
 
 function onGalleryItemClicked(elItem) {
+    document.querySelector('.gallery').classList.add('hide');
+    document.querySelector('.editor').classList.remove('hide');
     var meme = getMemeById(elItem.dataset.id);
     initEditor(meme);
 }
@@ -43,10 +45,6 @@ function onSubmitNewMeme(ev, elForm) {
     renderGallery();
 }
 
-function openEditor(meme) {
-    console.log(meme);
-}
-
 function onCloseModal() {
     document.querySelector('.modal').classList.add('hide');
 }
@@ -54,4 +52,3 @@ function onCloseModal() {
 function onDisplaySearch() {
     document.querySelector('.search-bar').classList.toggle('hidden');
 }
-

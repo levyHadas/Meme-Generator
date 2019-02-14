@@ -13,7 +13,7 @@
     <header class="flex align-center space-around">
         <h1 class="main-title">Meme Generator</h1>
     </header>
-    <section class="gallery main">
+    <section class="gallery main hide">
         <div class="top-bar flex space-between align-center">
             <div class="search-bar hidden">
                 <button class="search-btn btn" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
@@ -44,9 +44,10 @@
     </section>
     <section class="editor main">
         <div class="top-bar">
-            <div class="btns-container">
+            <div class="btns-container flex align-center space-between">
                 <button class="btn btn-download"><a href="" onclick="downloadImg(this)" download="my-canvas.jpg">Download</a></button>
-                <button class="btn btn-share">Share</button>
+                <button class="btn btn-share" onclick="">Share</button>
+                <button class="btn btn-to-gallery" onclick="onBackToGallery()">Back To Gallery</button>
             </div>
         </div>
         <div class="canvas-container">
