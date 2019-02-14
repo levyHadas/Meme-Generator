@@ -4,7 +4,11 @@ var gCtx
 
 
 // initCanvas()
-
+function initEditor(meme) {
+    var imgSrc = meme.src
+    resetCanvasState()
+    initCanvas(imgSrc)
+}
 function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
     setCurrTxtSets('img', src)
     var canvas = document.querySelector('#meme-canvas')
@@ -23,7 +27,7 @@ function resizeCanvas(canvas) {
     canvas.height = elCanvasContainer.offsetHeight
 }
 function setCanvasContainerSize(elCanvasContainer) {
-    var imgSrc = getCurrTxtSets('img')
+    var imgSrc = getCanvasState('img')
     var imgObj = new Image();
     imgObj.src= imgSrc;
     //we want to make the img as big as we can, will still in ratio
@@ -36,7 +40,7 @@ function setCanvasContainerSize(elCanvasContainer) {
 function drawImg() {
     gCtx.fillText('jfaskfnajksnfdkjnaskjdnfkjsandflkjnaskjnfkjladsnjfnkjsnfl', 30, 30);
 
-    var imgSrc = getCurrTxtSets('img')
+    var imgSrc = getCanvasState('img')
     document.querySelector('.canvas-img').src =  imgSrc
     var elImg = document.querySelector('.canvas-img')
     var canvas = document.querySelector('#meme-canvas')
@@ -48,8 +52,8 @@ function drawImg() {
 function renderTxt(txt = '') {
     var elTextPlace = document.querySelector('.meme-text') 
     elTextPlace.innerText = txt;
-    elTextPlace.style.color = getCurrTxtSets('color')
-    elTextPlace.style.font = `${getCurrTxtSets('size')} ${getCurrTxtSets('font')}`
+    elTextPlace.style.color = getCanvasState('color')
+    elTextPlace.style.font = `${getCanvasState('size')} ${getCanvasState('font')}`
 }
 
 function onStartTyping() {
@@ -82,8 +86,16 @@ function downloadImg(elLink) {
 
 function addTextToCanvas() {
     var txt = document.querySelector('.meme-text').innerText
-    gCtx.font = `${getCurrTxtSets('size')} ${getCurrTxtSets('font')}`
-    gCtx.fillStyle = getCurrTxtSets('color')
+    gCtx.font = `${getCanvasState('size')} ${getCanvasState('font')}`
+    gCtx.fillStyle = getCanvasState('color')
     //need to set position and shadow
     gCtx.fillText(txt, 30, 30);
 }
+
+
+// shadow
+// reset input text when new pic
+// add share
+// move text
+// add more text
+// add painter
