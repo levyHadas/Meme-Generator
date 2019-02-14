@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background-image: url('../img/bgcollage.jpg');
@@ -14,7 +18,7 @@ header {
 
 section.main {
     background-color: rgba(122, 62, 62, 0.26);
-    padding-bottom: 20px;
+    padding-bottom: 20px; 
 }
 
 .top-bar {
@@ -34,19 +38,26 @@ section.main {
 }
 
 .img-gallery {
-    width: 100%;
+    max-width: 100%;
     height: 85vw;
     grid-template: repeat(4, 18vw) / repeat(8, 1fr);
-    margin: 20px;
+    margin: 3.6vw 3.6vw 0;
     gap: 2vw;
 }
 
 @media (min-width: 1092px) {
         .img-gallery {
         gap: 20px;
-        width: 1052px;
+        width: 1012px;
+        grid-template-rows: repeat(4, 196px);
         height: 928px;
-        margin: 20px auto;
+        margin: 40px auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .img-gallery{
+        grid-template: repeat(4, 12vw) / repeat(10, 1fr);
     }
 }
 
@@ -72,8 +83,16 @@ section.main {
     transform: translate(1px, 1px);
 }
 
-.img-gallery>:nth-child(7n + 5) {
-    grid-column: 2 / 4;
+@media (max-width: 1200px) {
+    .img-gallery>:nth-child(7n + 5) {
+        grid-column: 2 / 4;
+    }
+}
+
+@media (min-width: 1200px) {
+    .img-gallery>:nth-child(9n + 6) {
+        grid-column: 2 / 4;
+    }
 }
 
 .grid {
