@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+}
+
+header {
+    height: 130px;
+    background-color: #303030;
+}
+
+.main-title {
+    color: aliceblue;
+}
+
+section.main {
+    background-color: #202020;
+}
+
+.top-bar {
+    height: 60px;
+    background-color: rgb(122, 62, 62);
+    margin-bottom: 20px;
+}
+
+.img-gallery {
+    grid-template: repeat(4, 175px) / repeat(8, 100px);
+    margin: 20px;
+    /* gap: 20px; */
+}
+
+.img-gallery>* {
+    /* margin: 0 0 20px 20px; */
+    grid-column: span 2;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.img-gallery>:nth-child(7n + 5) {
+    grid-column: 2 / 4;
+}
+
+.grid {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.modal>* {
+    height: 100%;
+    z-index: 2;
+}
+
+.modal {
+    background-color: brown;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.hide {
+    display: none;
+}
+
+.polygon {
+    background-color: brown;
+}
+
+.gallery-item {
+    clip-path: polygon(43.3% 0, 0 25%, 0 75%, 43.3% 100%, 86.6% 75%, 86.6% 25%);
+    background-position: center;
+    background-size: cover;
+    width: 200px;
+    height:200px;
+    object-fit: cover;
+    object-position: center; 
+    cursor: pointer;
+}

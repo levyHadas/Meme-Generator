@@ -5,16 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <title>Meme Generator</title>
 </head>
 
 <body onload="init()">
-    <header>
-        <h1>Meme Generator</h1>
+    <header class="flex align-center space-around">
+        <h1 class="main-title">Meme Generator</h1>
     </header>
-    <section class="gallery">
-        <div class="top-bar"></div>
-        <div class="img-gallery"></div>
+    <section class="gallery main">
+        <div class="top-bar">
+            <div class="search-bar hidden">
+                <button class="search-btn" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
+                <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes">
+            </div>
+            <button class="add-meme" onclick="onAddMeme()">Add Meme</button>
+        </div>
+        <div class="modal add-meme hide">
+            <form class="flex column align-center space-around" onsubmit="onSubmitNewMeme(event, this)">
+                <label for="new-meme-name"> Name
+                    <input type="text" name="new-meme-name" placeholder="Meme Name" required>
+                </label>
+                <label for="mew-meme-tags"> Tags
+                    <input type="text" name="new-meme-tags" placeholder="seperate, with, commas" required>
+                </label>
+                <label for="mew-meme-src"> Image Source
+                    <input type="text" name="new-meme-src" placeholder="img/img-memes/ancient_aliens.jpg" required>
+                </label>
+                <div class="modal-buttons">
+                    <input type="submit">
+                    <button onclick="onCloseModal()">cancel</button>
+                </div>
+            </form>
+        </div>
+        <div class="img-gallery grid">
+        </div>
     </section>
     <section class="editor">
         <div class="top-bar"></div>
