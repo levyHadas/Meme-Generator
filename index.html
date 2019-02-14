@@ -45,8 +45,12 @@
     <section class="editor main">
         <div class="top-bar">
             <div class="btns-container flex align-center space-between">
-                <button class="btn btn-download"><a href="" onclick="downloadImg(this)" download="my-canvas.jpg">Download</a></button>
-                <button class="btn btn-share" onclick="">Share</button>
+                <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)" download="my-canvas.jpg">Download</a></button>
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden"/>
+                    <button type="submit">Publish</button>
+                </form>
+                <div class="share-container"></div>
                 <button class="btn btn-to-gallery" onclick="onBackToGallery()">Back To Gallery</button>
             </div>
         </div>
@@ -67,7 +71,7 @@
             </select>
             <select class="txt-display" data-type="font" onchange="onDisplayChange(this)">
                 <option value="monospace" selected>monospace</option>
-                <option value="monospace" >monospace</option>
+                <option value="monospace">monospace</option>
             </select>
         </div>
     </section>
