@@ -93,9 +93,11 @@ function addTextToCanvas() {
 }
 
 
-// shadow
 // reset input text when new pic
-// add share
-// move text
 // add more text
+
+// move text
+// shadow
+// add share
+
 // add painter
