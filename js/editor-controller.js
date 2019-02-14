@@ -9,8 +9,9 @@ function initEditor(meme) {
     resetCanvasState()
     initCanvas(imgSrc)
 }
+
 function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
-    setCurrTxtSets('img', src)
+    setCanvasState('img', src)
     var canvas = document.querySelector('#meme-canvas')
     gCtx = canvas.getContext('2d')
     drawImg()
@@ -19,27 +20,7 @@ function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
 }
 
 
-
-function resizeCanvas(canvas) {
-    var elCanvasContainer = document.querySelector('.canvas-container')
-    setCanvasContainerSize(elCanvasContainer)
-    canvas.width = elCanvasContainer.offsetWidth
-    canvas.height = elCanvasContainer.offsetHeight
-}
-function setCanvasContainerSize(elCanvasContainer) {
-    var imgSrc = getCanvasState('img')
-    var imgObj = new Image();
-    imgObj.src= imgSrc;
-    //we want to make the img as big as we can, will still in ratio
-    //since it's canvas we don't have features like object-fit
-    var ratio = (imgObj.height < imgObj.width) ? imgObj.height/imgObj.width : imgObj.width/imgObj.height
-    elCanvasContainer.style.height = `${elCanvasContainer.clientWidth*ratio}px`
-  
-}
-
 function drawImg() {
-    gCtx.fillText('jfaskfnajksnfdkjnaskjdnfkjsandflkjnaskjnfkjladsnjfnkjsnfl', 30, 30);
-
     var imgSrc = getCanvasState('img')
     document.querySelector('.canvas-img').src =  imgSrc
     var elImg = document.querySelector('.canvas-img')
@@ -48,6 +29,25 @@ function drawImg() {
         gCtx.drawImage(elImg, 0, 0, canvas.width, canvas.height)
     }
 }
+
+
+function resizeCanvas(canvas) {
+    var elCanvasContainer = document.querySelector('.canvas-container')
+    setCanvasContainerSize(elCanvasContainer)
+    canvas.width = elCanvasContainer.offsetWidth
+    canvas.height = elCanvasContainer.offsetHeight
+}
+
+function setCanvasContainerSize(elCanvasContainer) {
+    var imgSrc = getCanvasState('img')
+    var imgObj = new Image();
+    imgObj.src= imgSrc;
+    //we want to make the img as big as we can, will still in ratio
+    //since it's canvas we don't have features like object-fit
+    var ratio = (imgObj.height < imgObj.width) ? imgObj.height/imgObj.width : imgObj.width/imgObj.height
+    elCanvasContainer.style.height = `${elCanvasContainer.clientWidth*ratio}px`
+}
+
 
 function renderTxt(txt = '') {
     var elTextPlace = document.querySelector('.meme-text') 
@@ -62,16 +62,19 @@ function onStartTyping() {
 
 function onTextEdit(txt) {
     renderTxt(txt)
+    //add text to model
 }
+
 function onDisplayChange(elTxtDisplay) {
     var changeType = elTxtDisplay.dataset.type
     var ChangeVal = elTxtDisplay.value
-    setCurrTxtSets(changeType, ChangeVal)
+    setCanvasState(changeType, ChangeVal)
     submitChange()
 }
 
 function submitChange() {
     var txt = document.querySelector('.meme-text').innerText
+    //TODO: take txt from model instead of dom
     renderTxt(txt) 
 }
 
@@ -89,15 +92,29 @@ function addTextToCanvas() {
     gCtx.font = `${getCanvasState('size')} ${getCanvasState('font')}`
     gCtx.fillStyle = getCanvasState('color')
     //need to set position and shadow
-    gCtx.fillText(txt, 30, 30);
+    //need to get div location
+    var xLocation = 30 //left point where text start
+    var yLocation = 30 //bottom point where text start
+    gCtx.fillText(txt, xLocation, yLocation);
 }
 
 
 // reset input text when new pic
 // add more text
-
 // move text
-// shadow
-// add share
+//Align left, right, center
 
+
+// navigation + hide show
+// add share
+// shadow 
+
+// render fonts to select from js
+//move control panel in editor to side in desktop - css container of control panel
+//css control panel
+
+//delete line
+
+//change font size to range
+//change text lines way of rendering
 // add painter
