@@ -4,4 +4,3 @@ function init() {
     createMemes();
 }
 
-function renderGallery()

@@ -8,7 +8,7 @@
     <title>Meme Generator</title>
 </head>
 
-<body onload="init()">
+<body onload="init(), initCanvas()">
     <header>
         <h1>Meme Generator</h1>
     </header>
@@ -17,9 +17,31 @@
         <div class="img-gallery"></div>
     </section>
     <section class="editor">
-        <div class="top-bar"></div>
-        <div class="canvas-container"></div>
-        <div class="control-panel"></div>
+        <div class="top-bar">
+            <div class="btns-container">
+                <button class="btn btn-download"><a href="" onclick="downloadImg(this)" download="my-canvas.jpg">Download</a></button>
+                <button class="btn btn-share">Share</button>
+            </div>
+        </div>
+        <div class="canvas-container">
+            <div class="meme-text">test text</div>
+            <canvas id="meme-canvas"></canvas>
+        </div>
+        <img class="canvas-img" src="" hidden alt="">
+        <div class="control-panel">
+            <label for="text-input-label">Enter your Text
+                <input type="text" class="text-input" onfocus="onStartTyping()" oninput="onTextEdit(this.value)" onfocus="onStartTyping()">
+            </label>
+            <input type="color" class="txt-display" data-type="color" onchange="onDisplayChange(this)">
+            <select class="txt-display" data-type="size" onchange="onDisplayChange(this)">
+                <option selected value="32">32 px</option>
+                <option value="50">50 px</option>
+                <option value="50">50 px</option>
+            </select>
+            <select class="txt-display" data-type="font" onchange="onDisplayChange(this)">
+                <option value="monospace" selected>monospace</option>
+            </select>
+        </div>
     </section>
     <script src="js/meme-utils.js"></script>
     <script src="js/gallery-service.js"></script>
