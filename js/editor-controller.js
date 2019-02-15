@@ -49,7 +49,7 @@ function setCanvasContainerSize(elCanvasContainer) {
 
 
 function renderTxt(txt = '') {
-    var elTextPlace = document.querySelector('.meme-text') 
+    var elTextPlace = document.querySelector('.meme-text');
     elTextPlace.innerText = txt;
     elTextPlace.style.color = getCanvasState('color')
     elTextPlace.style.font = `${getCanvasState('size')} ${getCanvasState('font')}`
@@ -90,6 +90,8 @@ function addTextToCanvas() {
     var txt = document.querySelector('.meme-text').innerText
     gCtx.font = `${getCanvasState('size')} ${getCanvasState('font')}`
     gCtx.fillStyle = getCanvasState('color')
+    gCtx.shadowBlur = 1;
+    gCtx.shadowColor = rgb(0, 0, 0);
     //need to set position and shadow
     //need to get div location
     var xLocation = 30 //left point where text start

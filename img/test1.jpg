@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="init(), initCanvas()">
+    <header class="flex align-center space-around">
+        <h1 class="main-title">Meme Generator</h1>
+    </header>
+    <section class="gallery main">
+        <div class="top-bar flex space-between align-center">
+            <div class="search-bar hidden">
+                <button class="search-btn btn" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
+                <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes">
+            </div>
+            <h2>Select Meme Image</h2>
+            <button class="add-meme btn" onclick="onAddMeme()"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="modal add-meme hide">
+            <form class="flex column align-center space-around" onsubmit="onSubmitNewMeme(event, this)">
+                <label for="new-meme-name"> Name
+                    <input type="text" name="new-meme-name" placeholder="Meme Name" required>
+                </label>
+                <label for="mew-meme-tags"> Tags
+                    <input type="text" name="new-meme-tags" placeholder="seperate, with, commas" required>
+                </label>
+                <label for="mew-meme-src"> Image Source
+                    <input type="text" name="new-meme-src" placeholder="img/img-memes/ancient_aliens.jpg" required>
+                </label>
+                <div class="modal-buttons">
+                    <input type="submit">
+                    <button onclick="onCloseModal()">cancel</button>
+                </div>
+            </form>
+        </div>
+        <div class="img-gallery grid">
+        </div>
+    </section>
+    <section class="editor main hide">
+        <div class="top-bar">
+            <div class="btns-container flex align-center space-between">
+                <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)" download="my-canvas.jpg">Download</a></button>
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden"/>
+                    <button type="submit">Publish</button>
+                </form>
+                <div class="share-container"></div>
+                <button class="btn btn-to-gallery" onclick="onBackToGallery()">Back To Gallery</button>
+            </div>
+        </div>
+        <div class="canvas-container">
+            <div class="meme-text"></div>
+            <canvas id="meme-canvas"></canvas>
+        </div>
+        <img class="canvas-img" src="" hidden alt="">
+        <div class="control-panel">
+            <label for="text-input-label">Enter your Text
+                <input type="text" class="text-input" onfocus="onStartTyping()" oninput="onTextEdit(this.value)" onfocus="onStartTyping()">
+            </label>
+            <input type="color" class="txt-display" data-type="color" onchange="onDisplayChange(this)">
+            <select class="txt-display" data-type="size" onchange="onDisplayChange(this)">
+                <option selected value="32">32 px</option>
+                <option value="50">50 px</option>
+                <option value="50">50 px</option>
+            </select>
+            <select class="txt-display" data-type="font" onchange="onDisplayChange(this)">
+                <option value="monospace" selected>monospace</option>
+                <option value="monospace">monospace</option>
+            </select>
+        </div>
+    </section>
+    <script src="js/meme-utils.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+    <script src="js/editor-service.js"></script>
+    <script src="js/editor-controller.js"></script>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script></body>
+
+</html>

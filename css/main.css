@@ -163,6 +163,7 @@ section.main {
     color: black;
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
+    text-shadow: 0 0 1px black;
 }
 
 .search-bar {
