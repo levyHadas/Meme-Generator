@@ -85,6 +85,7 @@ section.main {
     }
 
     .btns-container {
+        position: static;
         padding: 0;
         background-color: unset;
     }
@@ -330,4 +331,13 @@ a.download {
     color: white;
     font-family: klavika-bold;
     display: block;
+}
+
+.txt-2 {
+    top: 50%;
+    /* temp */
+}
+
+.meme-txt {
+    min-width: 20px;
 }

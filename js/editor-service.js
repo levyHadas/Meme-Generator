@@ -23,13 +23,14 @@ function getTxtSettings (id, property) {
 }
 
 function findTxtById(id) {
-    return gCanvasState.txt.find( (temp) => temp.id === id)
+    var temp = gCanvasState.txt.find( (temp) => temp.id === id)
+    return temp
 
 }
 
 function resetCanvasState() {
     gCanvasState = {img: 'img/meme-imgs/patrick.jpg',
-                    txt: [createTxtData('top'), createTxtData('bottom')]}       
+                    txt: [createTxtData('1'), createTxtData('2')]}       
 }
 
 function createTxtData(id) {
