@@ -1,10 +1,13 @@
 
 'use strict';
 var gCtx
+var gNumOfTxtLines = 2
+var gInFocusTxtId = '1'
 
 // initCanvas()
 function initEditor(meme) {
     var imgSrc = meme.src
+    //need to be handled
     document.querySelectorAll('.txt-input').value = ''
     resetCanvasState()
     initCanvas(imgSrc)
@@ -16,7 +19,6 @@ function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
     gCtx = canvas.getContext('2d')
     drawImg()
     resizeCanvas(canvas)
-    // renderTxt()
 }
 
 
@@ -49,10 +51,10 @@ function setCanvasContainerSize(elCanvasContainer) {
 }
 
 
-function renderTxt(txtId, txt) {
-    if (txtId === 'top') var elTextPlace = document.querySelector('.top-txt')
-    else var elTextPlace = document.querySelector('.bottom-txt')
-    elTextPlace.innerText = txt;
+function renderTxt(txtId, txt = null) {
+    if (txtId === '1') var elTextPlace = document.querySelector('.txt-1')
+    else var elTextPlace = document.querySelector('.txt-2')
+    if (txt) elTextPlace.innerText = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color')
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
 }
@@ -60,43 +62,43 @@ function renderTxt(txtId, txt) {
 
 function onEndTyping(elTxtInput) {
     var txtId = elTxtInput.dataset.id
-    var txt = elTxtInput.value
+    var txt = elTxtInput.innerText
+    console.log(txt)
     setTxtSettings(txtId, 'content', txt)
-    console.log(gCanvasState)
 }
 
 function onTextEdit(elTxtInput) {
     // document.querySelector('.editable-txt').style.border = 'none'
+
     var txtId = elTxtInput.dataset.id
-    var txt = elTxtInput.value
-    renderTxt(txtId, txt)
+    renderTxt(txtId)
     //add text to model
+}
+
+function setInFocusTxtId(elTxtContainer) {
+    gInFocusTxtId = elTxtContainer.firstElementChild.dataset.id
 }
 
 
 
 function onDisplayChange(elTxtDisplay) {
-    var txtId = elTxtDisplay.dataset.id
     var changeType = elTxtDisplay.dataset.type
     var ChangeVal = elTxtDisplay.value
-    setTxtSettings(txtId, changeType, ChangeVal)
-    submitChange(txtId)
+    setTxtSettings(gInFocusTxtId, changeType, ChangeVal)
+    submitChange(gInFocusTxtId)
 }
 
 function submitChange(txtId) {
-    var txt = getCurrTxt(txtId)
+    var txt = getTxt(txtId)
     renderTxt(txtId, txt)
 }
 
-function getCurrTxt(txtId) {
-    if (txtId === 'top') var elTextPlace = document.querySelector('.top-txt')
-    else var elTextPlace = document.querySelector('.bottom-txt')
-    return elTextPlace.innerText
-    //TODO: read this from model and ot from DOM
+function getTxt(txtId) {
+    return getTxtSettings(txtId, 'content')
 }
 
 function downloadImg(elLink) {
-    // addCanvasTxt()
+    addCanvasTxt()
     var canvas = document.querySelector('#meme-canvas')
     var imgContent = canvas.toDataURL('image/png');
     elLink.href = imgContent
@@ -104,15 +106,19 @@ function downloadImg(elLink) {
     drawImg()
 }
 
-function addCanvasTxt(txtId = 'top') {
-    var txt = document.querySelector('.meme-text').innerText
-    gCtx.fillStyle = getTxtSettings(txtId, 'color')
-    gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
-    //need to set position and shadow
-    //need to get div location
-    var xLocation = 30 //left point where text start
-    var yLocation = 30 //bottom point where text start
-    gCtx.fillText(txt, xLocation, yLocation);
+function addCanvasTxt() {
+    for (let i = 1; i < gNumOfTxtLines + 1; i++) {
+        var txtId = ''+ i
+        var txt = getTxt(txtId)
+        console.log(txt)
+        gCtx.fillStyle = getTxtSettings(txtId, 'color')
+        gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+        //need to set position and shadow
+        //need to get div location
+        var xLocation = 30 + i*10 //left point where text start
+        var yLocation = 30 + i*10 //bottom point where text start
+        gCtx.fillText(txt, xLocation, yLocation);
+    }
 }
 
 function onBackToGallery() {

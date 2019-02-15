@@ -200,8 +200,13 @@ a.download {
     border: 1px solid white;
 }
 
-.bottom-txt {
-    bottom: 60%;
+.txt-2 {
+    top: 50%;
+    /* temp */
+}
+
+.meme-txt {
+    min-width: 20px;
 }
 
 
