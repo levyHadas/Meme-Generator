@@ -13,6 +13,11 @@ function initEditor(meme) {
     initCanvas(imgSrc)
 }
 
+function setInFocusTxtId(txtContainer){
+    console.dir(txtContainer)
+    gInFocusTxtId = txtContainer.firstElementChild.dataset.id
+}
+
 function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
     setImg(src)
     var canvas = document.querySelector('#meme-canvas')
@@ -68,7 +73,7 @@ function onEndTyping(elTxtInput) {
 }
 
 function onTextEdit(elTxtInput) {
-    // document.querySelector('.editable-txt').style.border = 'none'
+    document.querySelector('.editable-txt').style.border = 'none'
 
     var txtId = elTxtInput.dataset.id
     renderTxt(txtId)
