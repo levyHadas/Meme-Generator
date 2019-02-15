@@ -158,7 +158,7 @@ section.main {
     margin: 0 auto;
 }
 
-.meme-text {
+.meme-txt {
     position: absolute;
     color: black;
     font-family: 'Courier New', Courier, monospace;
@@ -192,3 +192,17 @@ a.download {
     text-decoration: none;
     color: rgb(255, 222, 212);
 }
+
+.editable-txt {
+    border: 1px solid white;
+}
+.editable-txt:focus {
+    border: 1px solid white;
+}
+
+.bottom-txt {
+    bottom: 60%;
+}
+
+
+

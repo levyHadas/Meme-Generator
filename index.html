@@ -54,17 +54,17 @@
                 <button class="btn btn-to-gallery" onclick="onBackToGallery()">Back To Gallery</button>
             </div>
         </div>
-        <div class="top-txt">
-                <!-- <input type="text" class="text-input top-txt" data-id="bottom" onfocus="onStartTyping()" oninput="onTextEdit(this)" onblur="onEndTyping(this)"> -->
-        </div>
-        <div class="bottom-txt"></div>
         <div class="canvas-container">
+            <div class="meme-txt top-txt">
+                    <!-- <p contenteditable="true" class="txt-input editable-txt top-txt" data-id="bottom" autofocus oninput="onTextEdit(this)" onblur="onEndTyping(this)">...</p> -->
+            </div>
+            <div class="meme-txt bottom-txt"></div>
             <canvas id="meme-canvas"></canvas>
         </div>
         <img class="canvas-img" src="" hidden alt="">
         <div class="control-panel top-txt">
-            <label for="text-input-label">Enter your Text
-                <input type="text" class="text-input" data-id="top" onfocus="onStartTyping()" oninput="onTextEdit(this)" onblur="onEndTyping(this)">
+            <label for="txt-input-label">Enter your Text
+                <input type="text" class="txt-input" data-id="top" oninput="onTextEdit(this)" onblur="onEndTyping(this)">
             </label>
             <input type="color" class="txt-display" data-id="top" data-type="color" onchange="onDisplayChange(this)">
             <select class="txt-display" data-id="top"data-type="size" onchange="onDisplayChange(this)">
@@ -78,8 +78,8 @@
             </select>
         </div>
         <div class="control-panel bottom-txt">
-            <label for="text-input-label">Enter your Text
-                <input type="text" class="text-input" data-id="bottom" onfocus="onStartTyping()" oninput="onTextEdit(this)" onblur="onEndTyping(this)">
+            <label for="txt-input-label">Enter your Text
+                <input type="text" class="txt-input" data-id="bottom" oninput="onTextEdit(this)" onblur="onEndTyping(this)">
             </label>
             <input type="color" class="txt-display" data-id="bottom" data-type="color" onchange="onDisplayChange(this)">
             <select class="txt-display" data-id="bottom" data-type="size" onchange="onDisplayChange(this)">

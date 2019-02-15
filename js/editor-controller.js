@@ -5,7 +5,7 @@ var gCtx
 // initCanvas()
 function initEditor(meme) {
     var imgSrc = meme.src
-    document.querySelector('.text-input').value = ''
+    document.querySelectorAll('.txt-input').value = ''
     resetCanvasState()
     initCanvas(imgSrc)
 }
@@ -58,11 +58,6 @@ function renderTxt(txtId, txt) {
 }
 
 
-
-function onStartTyping() {
-    gCtx.beginPath()
-}
-
 function onEndTyping(elTxtInput) {
     var txtId = elTxtInput.dataset.id
     var txt = elTxtInput.value
@@ -71,6 +66,7 @@ function onEndTyping(elTxtInput) {
 }
 
 function onTextEdit(elTxtInput) {
+    // document.querySelector('.editable-txt').style.border = 'none'
     var txtId = elTxtInput.dataset.id
     var txt = elTxtInput.value
     renderTxt(txtId, txt)
@@ -100,9 +96,9 @@ function getCurrTxt(txtId) {
 }
 
 function downloadImg(elLink) {
-    addCanvasTxt()
+    // addCanvasTxt()
     var canvas = document.querySelector('#meme-canvas')
-    var imgContent = canvas.toDataURL('image/jpeg');
+    var imgContent = canvas.toDataURL('image/png');
     elLink.href = imgContent
     gCtx.clearRect(0, 0, canvas.width, canvas.height)
     drawImg()
