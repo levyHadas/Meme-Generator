@@ -28,8 +28,6 @@ function findTxtById(id) {
 
 }
 
-
-
 function resetCanvasState() {
     gCanvasState = {img: 'img/meme-imgs/patrick.jpg',
                     txt: [createTxtData('1'), createTxtData('2')]}       
@@ -38,9 +36,7 @@ function resetCanvasState() {
 function createTxtData(id) {
     return { id: id,
             content: '',
-            color: 'black',
-            font: 'Cursive',
-            size: '2rem'}
-
+            color: 'white',
+            font: 'impact',
+            size: '3rem'}
 }
-

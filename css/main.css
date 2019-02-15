@@ -2,9 +2,17 @@
     box-sizing: border-box;
 }
 
+html {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 body {
     margin: 0;
     background-image: url('../img/bgcollage.jpg');
+}
+
+h1, h2 {
+    font-weight: normal;
 }
 
 header {
@@ -43,7 +51,8 @@ section.main {
 .img-gallery {
     max-width: 100%;
     height: 85vw;
-    grid-template: repeat(4, 18vw) / repeat(8, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: 18vw;
     margin: 3.6vw 3.6vw 0;
     gap: 2vw;
 }
@@ -52,7 +61,7 @@ section.main {
         .img-gallery {
         gap: 20px;
         width: 1012px;
-        grid-template-rows: repeat(4, 196px);
+        grid-auto-rows: 196px;
         height: 928px;
         margin: 40px auto;
     }
@@ -60,7 +69,8 @@ section.main {
 
 @media (min-width: 1200px) {
     .img-gallery{
-        grid-template: repeat(4, 12vw) / repeat(10, 1fr);
+        grid-template-columns: repeat(10, 1fr);
+        grid-auto-rows: 12vw;
     }
 }
 
@@ -126,13 +136,21 @@ section.main {
     justify-content: space-between;
 }
 
-.modal>* {
-    height: 100%;
-    z-index: 2;
+.modal h2 {
+    margin: 40px 80px;
+}
+
+.modal form {
+    flex: 1;
+}
+
+.modal input[type="text"] {
+    width: 300px;
+    /* height: 50px; */
 }
 
 .modal {
-    background-color: brown;
+    background-color: rgb(182, 106, 106);
     position: absolute;
     width: 500px;
     height: 500px;
@@ -140,6 +158,8 @@ section.main {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    border-radius: 20px;
+    border: 2px solid  black;
 }
 
 .hide {
@@ -163,6 +183,7 @@ section.main {
     color: black;
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
+    text-shadow: 0 0 1px black;
 }
 
 .search-bar {
@@ -196,6 +217,7 @@ a.download {
 .editable-txt {
     border: 1px solid white;
 }
+
 .editable-txt:focus {
     border: 1px solid white;
 }

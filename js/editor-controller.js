@@ -7,7 +7,7 @@ var gInFocusTxtId = '1'
 // initCanvas()
 function initEditor(meme) {
     var imgSrc = meme.src
-    //need to be handled
+    //need to be handled - take form object and not DOM
     document.querySelectorAll('.txt-input').value = ''
     resetCanvasState()
     initCanvas(imgSrc)
@@ -75,12 +75,6 @@ function onTextEdit(elTxtInput) {
     //add text to model
 }
 
-function setInFocusTxtId(elTxtContainer) {
-    gInFocusTxtId = elTxtContainer.firstElementChild.dataset.id
-}
-
-
-
 function onDisplayChange(elTxtDisplay) {
     var changeType = elTxtDisplay.dataset.type
     var ChangeVal = elTxtDisplay.value
@@ -113,6 +107,8 @@ function addCanvasTxt() {
         console.log(txt)
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
         gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+        gCtx.shadowColor = '#000000'
+        gCtx.shadowBlur = 1;
         //need to set position and shadow
         //need to get div location
         var xLocation = 30 + i*10 //left point where text start
@@ -120,61 +116,28 @@ function addCanvasTxt() {
         gCtx.fillText(txt, xLocation, yLocation);
     }
 }
+// function addCanvasTxt(txtId = 'top') {
+//     // var txt = document.querySelector('.meme-text').innerText
+//     var txt = 'test text';
+//     // gCtx.fillStyle = getTxtSettings(txtId, 'color')
+//     // gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+//     gCtx.font = '3em impact'
+//     gCtx.fillStyle = '#ffffff'
+//     gCtx.shadowColor = '#000000'
+//     gCtx.shadowBlur = 1;
+//     //need to set position and shadow
+//     //need to get div location
+//     var xLocation = 30 //left point where text start
+//     var yLocation = 30 //bottom point where text start
+//     console.log(gCtx);
+    
+//     gCtx.fillText(txt, xLocation, yLocation);
+// }
 
 function onBackToGallery() {
     document.querySelector('section.editor').classList.add('hide');
     document.querySelector('section.gallery').classList.remove('hide');
 }
-
-// on submit call to this function
-function uploadImg(elForm, ev) {
-    ev.preventDefault();
-
-    document.getElementById('imgData').value = document.querySelector('canvas').toDataURL("image/jpeg");
-
-    // A function to be called if request succeeds
-    function onSuccess(uploadedImgUrl) {
-        console.log('uploadedImgUrl', uploadedImgUrl);
-
-        uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-        document.querySelector('.share-container').innerHTML = `
-        <a class="w-inline-block social-share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
-           Share   
-        </a>`
-    }
-
-    doUploadImg(elForm, onSuccess);
-}
-
-function doUploadImg(elForm, onSuccess) {
-    var formData = new FormData(elForm);
-
-    fetch('http://ca-upload.com/here/upload.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(function (response) {
-            return response.text()
-        })
-        .then(onSuccess)
-        .catch(function (error) {
-            console.error(error)
-        })
-}
-
-
-
-
-// facebook api
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0&appId=807866106076694&autoLogAppEvents=1';
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
 
 //Hadas:
 // reset input text when new pic - done
@@ -186,11 +149,12 @@ function doUploadImg(elForm, onSuccess) {
 // navigation + hide show
 // add share
 // shadow 
-
-
 // render fonts to select from js
-//move control panel in editor to side in desktop - css container of control panel
-//css control panel
+
+
+
+// move control panel in editor to side in desktop - css container of control panel
+// css control panel
 
 //delete line
 
