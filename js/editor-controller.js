@@ -5,26 +5,27 @@ var gCtx
 // initCanvas()
 function initEditor(meme) {
     var imgSrc = meme.src
+    document.querySelector('.text-input').value = ''
     resetCanvasState()
     initCanvas(imgSrc)
 }
 
 function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
-    setCanvasState('img', src)
+    setImg(src)
     var canvas = document.querySelector('#meme-canvas')
     gCtx = canvas.getContext('2d')
     drawImg()
     resizeCanvas(canvas)
-    renderTxt()
+    // renderTxt()
 }
 
 
 function drawImg() {
-    var imgSrc = getCanvasState('img')
-    document.querySelector('.canvas-img').src =  imgSrc
+    var imgSrc = getImgSrc()
+    document.querySelector('.canvas-img').src = imgSrc
     var elImg = document.querySelector('.canvas-img')
     var canvas = document.querySelector('#meme-canvas')
-    elImg.onload = function(){
+    elImg.onload = function () {
         gCtx.drawImage(elImg, 0, 0, canvas.width, canvas.height)
     }
 }
@@ -38,47 +39,68 @@ function resizeCanvas(canvas) {
 }
 
 function setCanvasContainerSize(elCanvasContainer) {
-    var imgSrc = getCanvasState('img')
+    var imgSrc = getImgSrc()
     var imgObj = new Image();
-    imgObj.src= imgSrc;
+    imgObj.src = imgSrc;
     //we want to make the img as big as we can, will still in ratio
     //since it's canvas we don't have features like object-fit
-    var ratio = (imgObj.height < imgObj.width) ? imgObj.height/imgObj.width : imgObj.width/imgObj.height
-    elCanvasContainer.style.height = `${elCanvasContainer.clientWidth*ratio}px`
+    var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
+    elCanvasContainer.style.height = `${elCanvasContainer.clientWidth * ratio}px`
 }
 
 
-function renderTxt(txt = '') {
-    var elTextPlace = document.querySelector('.meme-text') 
+function renderTxt(txtId, txt) {
+    if (txtId === 'top') var elTextPlace = document.querySelector('.top-txt')
+    else var elTextPlace = document.querySelector('.bottom-txt')
     elTextPlace.innerText = txt;
-    elTextPlace.style.color = getCanvasState('color')
-    elTextPlace.style.font = `${getCanvasState('size')} ${getCanvasState('font')}`
+    elTextPlace.style.color = getTxtSettings(txtId, 'color')
+    elTextPlace.style.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
 }
+
+
 
 function onStartTyping() {
     gCtx.beginPath()
 }
 
-function onTextEdit(txt) {
-    renderTxt(txt)
+function onEndTyping(elTxtInput) {
+    var txtId = elTxtInput.dataset.id
+    var txt = elTxtInput.value
+    setTxtSettings(txtId, 'content', txt)
+    console.log(gCanvasState)
+}
+
+function onTextEdit(elTxtInput) {
+    var txtId = elTxtInput.dataset.id
+    var txt = elTxtInput.value
+    renderTxt(txtId, txt)
     //add text to model
 }
 
+
+
 function onDisplayChange(elTxtDisplay) {
+    var txtId = elTxtDisplay.dataset.id
     var changeType = elTxtDisplay.dataset.type
     var ChangeVal = elTxtDisplay.value
-    setCanvasState(changeType, ChangeVal)
-    submitChange()
+    setTxtSettings(txtId, changeType, ChangeVal)
+    submitChange(txtId)
 }
 
-function submitChange() {
-    var txt = document.querySelector('.meme-text').innerText
-    //TODO: take txt from model instead of dom
-    renderTxt(txt) 
+function submitChange(txtId) {
+    var txt = getCurrTxt(txtId)
+    renderTxt(txtId, txt)
+}
+
+function getCurrTxt(txtId) {
+    if (txtId === 'top') var elTextPlace = document.querySelector('.top-txt')
+    else var elTextPlace = document.querySelector('.bottom-txt')
+    return elTextPlace.innerText
+    //TODO: read this from model and ot from DOM
 }
 
 function downloadImg(elLink) {
-    addTextToCanvas()
+    addCanvasTxt()
     var canvas = document.querySelector('#meme-canvas')
     var imgContent = canvas.toDataURL('image/jpeg');
     elLink.href = imgContent
@@ -86,10 +108,10 @@ function downloadImg(elLink) {
     drawImg()
 }
 
-function addTextToCanvas() {
+function addCanvasTxt(txtId = 'top') {
     var txt = document.querySelector('.meme-text').innerText
-    gCtx.font = `${getCanvasState('size')} ${getCanvasState('font')}`
-    gCtx.fillStyle = getCanvasState('color')
+    gCtx.fillStyle = getTxtSettings(txtId, 'color')
+    gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
     //need to set position and shadow
     //need to get div location
     var xLocation = 30 //left point where text start
@@ -107,7 +129,7 @@ function uploadImg(elForm, ev) {
     ev.preventDefault();
 
     document.getElementById('imgData').value = document.querySelector('canvas').toDataURL("image/jpeg");
-   
+
     // A function to be called if request succeeds
     function onSuccess(uploadedImgUrl) {
         console.log('uploadedImgUrl', uploadedImgUrl);
@@ -129,36 +151,40 @@ function doUploadImg(elForm, onSuccess) {
         method: 'POST',
         body: formData
     })
-    .then(function (response) {
-        return response.text()
-    })
-    .then(onSuccess)
-    .catch(function (error) {
-        console.error(error)
-    })
+        .then(function (response) {
+            return response.text()
+        })
+        .then(onSuccess)
+        .catch(function (error) {
+            console.error(error)
+        })
 }
 
 
 
 
 // facebook api
-(function(d, s, id) {
+(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0&appId=807866106076694&autoLogAppEvents=1';
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+}(document, 'script', 'facebook-jssdk'));
 
-// reset input text when new pic
+
+
+//Hadas:
+// reset input text when new pic - done
 // add more text
 // move text
 //Align left, right, center
 
-
+// Yanai
 // navigation + hide show
 // add share
 // shadow 
+
 
 // render fonts to select from js
 //move control panel in editor to side in desktop - css container of control panel

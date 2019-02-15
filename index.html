@@ -54,23 +54,41 @@
                 <button class="btn btn-to-gallery" onclick="onBackToGallery()">Back To Gallery</button>
             </div>
         </div>
+        <div class="top-txt">
+                <!-- <input type="text" class="text-input top-txt" data-id="bottom" onfocus="onStartTyping()" oninput="onTextEdit(this)" onblur="onEndTyping(this)"> -->
+        </div>
+        <div class="bottom-txt"></div>
         <div class="canvas-container">
-            <div class="meme-text"></div>
             <canvas id="meme-canvas"></canvas>
         </div>
         <img class="canvas-img" src="" hidden alt="">
-        <div class="control-panel">
+        <div class="control-panel top-txt">
             <label for="text-input-label">Enter your Text
-                <input type="text" class="text-input" onfocus="onStartTyping()" oninput="onTextEdit(this.value)" onfocus="onStartTyping()">
+                <input type="text" class="text-input" data-id="top" onfocus="onStartTyping()" oninput="onTextEdit(this)" onblur="onEndTyping(this)">
             </label>
-            <input type="color" class="txt-display" data-type="color" onchange="onDisplayChange(this)">
-            <select class="txt-display" data-type="size" onchange="onDisplayChange(this)">
+            <input type="color" class="txt-display" data-id="top" data-type="color" onchange="onDisplayChange(this)">
+            <select class="txt-display" data-id="top"data-type="size" onchange="onDisplayChange(this)">
                 <option selected value="32">32 px</option>
                 <option value="50">50 px</option>
                 <option value="50">50 px</option>
             </select>
-            <select class="txt-display" data-type="font" onchange="onDisplayChange(this)">
-                <option value="monospace" selected>monospace</option>
+            <select class="txt-display" data-id="top" data-type="font" onchange="onDisplayChange(this)">
+                <option value="monospace" selected>Cursive</option>
+                <option value="monospace">monospace</option>
+            </select>
+        </div>
+        <div class="control-panel bottom-txt">
+            <label for="text-input-label">Enter your Text
+                <input type="text" class="text-input" data-id="bottom" onfocus="onStartTyping()" oninput="onTextEdit(this)" onblur="onEndTyping(this)">
+            </label>
+            <input type="color" class="txt-display" data-id="bottom" data-type="color" onchange="onDisplayChange(this)">
+            <select class="txt-display" data-id="bottom" data-type="size" onchange="onDisplayChange(this)">
+                <option selected value="32">32 px</option>
+                <option value="50">50 px</option>
+                <option value="50">50 px</option>
+            </select>
+            <select class="txt-display" data-id="bottom" data-type="font" onchange="onDisplayChange(this)">
+                <option value="monospace" selected>Cursive</option>
                 <option value="monospace">monospace</option>
             </select>
         </div>
