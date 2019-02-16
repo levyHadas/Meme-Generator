@@ -56,7 +56,7 @@ section.main {
 
 .btns-container {
     position: absolute;
-    top: 50px;
+    top: 40px;
     padding: 10px 20px;
     background-color: rgb(161, 82, 82);
     width: 100%;
@@ -299,11 +299,8 @@ section.main {
 .canvas-container {
     position: relative;
     width: 90%;
-    /* height: 80vw; */
-    max-width: 500px;
-    max-height: 700px;
-    margin: 0 auto;
-    padding-top: 50px; 
+    max-width: 900px;
+    padding-top: 40px; 
     /* don't remove the padding witout talking! we need this */
 }
 
@@ -318,6 +315,7 @@ section.main {
     padding: 0 10px;
     cursor: pointer;
     outline: none;
+    font-size: 1rem
 }
 
 a.download {
@@ -325,6 +323,12 @@ a.download {
     text-decoration: none;
     color: rgb(255, 222, 212);
     padding: 15px 20px;
+}
+
+.color-label {
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 10px; 
 }
 
 
@@ -403,4 +407,55 @@ a.download {
 
 .tags-item:hover {
     color: brown;
+}
+
+.control-panel {
+    background-color: rgb(122, 62, 62);
+    flex-basis: 20%;
+    justify-content: space-evenly;
+    margin-top: 40px; 
+    padding: 0 20px;
+}
+
+.flex-container {
+    height: 300px;
+    justify-content: center;
+}
+
+.share-container {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-small {
+    height: 30px;
+    width: 30px;
+    font-size: 1rem;
+    padding: 2px;
+}
+
+.btn-download {
+    margin-right: 10px;
+}
+
+@media (max-width: 700px) {
+    .flex-container {
+        display: block;
+    }
+    .control-panel {
+        background-color: rgb(122, 62, 62);
+        margin-top: 40px; 
+        flex-direction: row;
+        padding: 10px; 
+        /* margin: 40px 0; */
+        top: 40px;
+        position: relative
+    }
+    .canvas-container {
+        margin: 0 auto;
+    }
+    .btns-container{
+        padding: 10px 30px;
+    }
+
 }

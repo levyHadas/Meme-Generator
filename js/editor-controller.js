@@ -39,6 +39,7 @@ function drawImg() {
 function resizeCanvas(canvas) {
     var elCanvasContainer = document.querySelector('.canvas-container')
     setCanvasContainerSize(elCanvasContainer)
+    setRelativeHeights()
     canvas.width = elCanvasContainer.offsetWidth
     canvas.height = elCanvasContainer.offsetHeight
 }
@@ -51,8 +52,14 @@ function setCanvasContainerSize(elCanvasContainer) {
     //since it's canvas we don't have features like object-fit
     var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
     elCanvasContainer.style.height = `${elCanvasContainer.clientWidth * ratio}px`
-    document.querySelector('.meme-txt.txt-2').style.top = (0.90*elCanvasContainer.clientWidth * ratio)+'px' //need to put this line in a better place
-    document.querySelector('.txt-2.delete').style.top = (0.90*elCanvasContainer.clientWidth * ratio)+'px' //need to put this line in a better place
+}
+
+function setRelativeHeights() {
+    var elCanvasContainer = document.querySelector('.canvas-container')
+    var containerHeight = elCanvasContainer.offsetHeight
+    document.querySelector('.meme-txt.txt-2').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
+    document.querySelector('.txt-2.delete').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
+    document.querySelector('.flex-container').style.height = (containerHeight + 40) + 'px'
 }
 
 
@@ -125,16 +132,16 @@ function addCanvasTxt() {
         gCtx.textBaseline = 'bottom'
         var xLocation = elTxts[i].offsetLeft
         var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight - 55 //padding
-        if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth/2 - getTxtWidth(txt, font)/2
+        if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
         else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
         gCtx.fillText(txt, xLocation, yLocation);
         console.log(gCtx);
-        
+
     }
 }
 
 function onDelete(elTxt) {
-    elTxt.parentElement.style.display= 'none'
+    elTxt.parentElement.style.display = 'none'
     setTxtSettings(elTxt.dataset.id, 'content')
 }
 
@@ -144,6 +151,33 @@ function getTxtWidth(txt, font) {
     ctx.font = font
     ctx.fillText(txt, 0, 0);
     return ctx.measureText(txt).width
+}
+
+function moveTxt(direction) {
+    var txt = document.querySelector(`p[data-id="${gInFocusTxtId}"]`)
+    var deleteBtn = document.querySelector(`.delete[data-id="${gInFocusTxtId}"]`)
+    switch (direction) {
+        case 'left':
+            var currPos = txt.offsetLeft
+            txt.style.left = currPos - 4 + 'px'
+            deleteBtn.style.left = currPos - 4 + 'px'
+            break
+        case 'right':
+            var currPos = txt.offsetLeft
+            txt.style.left = currPos + 4 + 'px'
+            deleteBtn.style.left = currPos -+4 + 'px'
+            break
+        case 'up':
+            var currPos = txt.offsetTop
+            txt.style.top = currPos - 4 + 'px'
+            deleteBtn.style.top = currPos - 4 + 'px'
+            break
+        case 'down':
+            var currPos = txt.offsetTop
+            txt.style.top = currPos + 4 + 'px'
+            deleteBtn.style.top = currPos + 4 + 'px'
+            break
+    }
 }
 
 
@@ -159,6 +193,12 @@ function getTxtWidth(txt, font) {
 // move text
 //Align left, right, center - done
 //delete line -done
+//arrange functions in logical order
+
+// move control panel in editor to side in desktop - Done
+// css control panel - Done
+//TODO: arrange functions in logical order
+
 
 
 // Yanai
@@ -168,9 +208,6 @@ function getTxtWidth(txt, font) {
 // render fonts to select from js
 
 
-
-// move control panel in editor to side in desktop - css container of control panel
-// css control panel
 
 
 //change font size to range
