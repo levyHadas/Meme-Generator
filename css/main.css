@@ -21,6 +21,11 @@ h1, h2 {
     font-weight: normal;
 }
 
+p {
+    padding: 0;
+    margin: 0;
+}
+
 header {
     height: 130px;
     background-color: #30303070;
@@ -276,6 +281,7 @@ section.main {
 }
 
 .canvas-container {
+    position: relative;
     width: 90%;
     /* height: 80vw; */
     max-width: 500px;
@@ -289,9 +295,12 @@ section.main {
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
     text-shadow: 0 0 1px black;
+    /* padding: 15px; */
+    /* min-height: 40px; */
+    min-width: 20px;
+    line-height: 48px;
+    display: inline-block;
 }
-
-
 
 .btn {
     border: none;
@@ -310,8 +319,8 @@ a.download {
 }
 
 .editable-txt {
-    border: 1px solid #89add6;
-    padding: 1px;
+    /* border: 1px solid #89add6; */
+    /* padding: 1px; */
    
 }
 
@@ -340,13 +349,10 @@ a.download {
     /* temp */
 }
 
-.meme-txt {
-    padding: 15px;
-    min-height: 40px;
-    min-width: 20px;
-}
-
-.meme-txt-container{
+.meme-txt-container {
+    position: relative;
+    padding: 0;
+    margin: 0;
 }
 
 
