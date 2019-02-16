@@ -287,6 +287,8 @@ section.main {
     max-width: 500px;
     max-height: 700px;
     margin: 0 auto;
+    padding-top: 50px; 
+    /* don't remove the padding witout talking! we need this */
 }
 
 
@@ -324,13 +326,12 @@ a.download {
 }
 
 .txt-2 {
-    top: 250px;
-    left: 30px;
+    left: 0;
     /* temp - this should be initial location */
 }
 .txt-1 {
-    top: 20px;
-    left: 30px;
+    top: 80px;
+    left: 0;
     /* temp - this class will not exist  */
 }
 
@@ -338,18 +339,23 @@ a.download {
 
 .meme-txt-container {
     position: absolute;
+    width: 100%;
+    top:0;
+
 }
 
 .meme-txt {
+    left: 5%; 
     outline: 1px solid white;
     font-size: 2rem;
-    min-width: 20px;
+    width: 90%;
     text-shadow: 0 0 1px black;
     line-height: 48px;
     display: inline-block;
     margin: 0;
     position: relative;
     padding: 0;
+    text-align: center;
 }
 
 .delete {
@@ -359,6 +365,10 @@ a.download {
     background-color: aliceblue;
     padding: 0 10px;
     cursor: pointer;
+}
+
+#help-canvas {
+    display: none;
 }
 
 
@@ -372,4 +382,6 @@ a.download {
     padding: 0;
     margin: 0;
 } */
+
+
 

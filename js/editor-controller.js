@@ -52,6 +52,8 @@ function setCanvasContainerSize(elCanvasContainer) {
     //since it's canvas we don't have features like object-fit
     var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
     elCanvasContainer.style.height = `${elCanvasContainer.clientWidth * ratio}px`
+    document.querySelector('.meme-txt.txt-2').style.top = (0.90*elCanvasContainer.clientWidth * ratio)+'px' //need to put this line in a better place
+    document.querySelector('.txt-2.delete').style.top = (0.90*elCanvasContainer.clientWidth * ratio)+'px' //need to put this line in a better place
 }
 
 
@@ -62,6 +64,7 @@ function renderTxt(txtId, txt = null) {
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
     elTextPlace.style.height = getTxtSettings(txtId, 'size');
+    elTextPlace.style.textAlign = getTxtSettings(txtId, 'align');
 }
 
 
@@ -115,12 +118,15 @@ function addCanvasTxt() {
     for (let i = 0; i < gNumOfTxtLines; i++) {
         var txtId = (i + 1) + ''
         var txt = getTxt(txtId)
+        var font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+        gCtx.font = font
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
-        gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
         gCtx.shadowColor = '#000000'
         gCtx.shadowBlur = 1;
         var xLocation = elTxts[i].offsetLeft
-        var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight
+        var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight - 55 //padding
+        if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth/2 - getTxtWidth(txt, font)/2
+        else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
         gCtx.fillText(txt, xLocation, yLocation);
     }
 }
@@ -130,16 +136,28 @@ function onDelete(elTxt) {
     setTxtSettings(elTxt.dataset.id, 'content')
 }
 
+function getTxtWidth(txt, font) {
+    var canvas = document.querySelector('#help-canvas')
+    var ctx = canvas.getContext('2d')
+    ctx.font = font
+    ctx.fillText(txt, 0, 0);
+    return ctx.measureText(txt).width
+}
+
+
+
 
 
 
 
 
 //Hadas:
+//line on img instead of input - done.
 // reset input text when new pic - done
-// add more text
 // move text
-//Align left, right, center
+//Align left, right, center - done
+//delete line -done
+
 
 // Yanai
 // navigation + hide show
@@ -152,10 +170,8 @@ function onDelete(elTxt) {
 // move control panel in editor to side in desktop - css container of control panel
 // css control panel
 
-//delete line
 
 //change font size to range
-//change text lines way of rendering
 // add painter
 
 

@@ -79,6 +79,12 @@
                 <option value="50">50 px</option>
                 <option value="50">50 px</option>
             </select>
+            <select class="txt-display" data-type="align" onchange="onDisplayChange(this)">
+                <option selected value="32">32 px</option>
+                <option value="center" selected>center</option>
+                <option value="right">right</option>
+                <option value="left">left</option>
+            </select>
             <select class="txt-display" data-type="font" onchange="onDisplayChange(this)">
                 <option value="Arial">Arial</option>
                 <option value="Avant Garde">Avant Garde</option>
@@ -94,6 +100,7 @@
                 <option value="Verdana">Verdana</option>
             </select>
         </div>
+        <canvas id="help-canvas"></canvas>
     </section>
     <script src="js/meme-utils.js"></script>
     <script src="js/share-utils.js"></script>
