@@ -310,11 +310,13 @@ a.download {
 }
 
 .editable-txt {
-    border: 1px solid white;
+    border: 1px solid #89add6;
+    padding: 1px;
+   
 }
 
 .editable-txt:focus {
-    border: 1px solid white;
+    /* border: 1px solid white; */
 }
 
 .bottom-txt {
@@ -339,5 +341,13 @@ a.download {
 }
 
 .meme-txt {
+    padding: 15px;
+    min-height: 40px;
     min-width: 20px;
 }
+
+.meme-txt-container{
+}
+
+
+

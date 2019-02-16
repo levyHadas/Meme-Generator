@@ -7,14 +7,14 @@ var gInFocusTxtId = '1'
 // initCanvas()
 function initEditor(meme) {
     var imgSrc = meme.src
-    //need to be handled - take form object and not DOM
-    document.querySelectorAll('.txt-input').value = ''
+    var txts = document.querySelectorAll('.meme-txt')
+    txts.forEach((txt) => txt.innerText = '  ')
+    //in the futur, add disaplay none here. the text box will only show after the button to add text is clicked
     resetCanvasState()
     initCanvas(imgSrc)
 }
 
-function setInFocusTxtId(txtContainer){
-    console.dir(txtContainer)
+function setInFocusTxtId(txtContainer) {
     gInFocusTxtId = txtContainer.firstElementChild.dataset.id
 }
 
@@ -68,7 +68,6 @@ function renderTxt(txtId, txt = null) {
 function onEndTyping(elTxtInput) {
     var txtId = elTxtInput.dataset.id
     var txt = elTxtInput.innerText
-    console.log(txt)
     setTxtSettings(txtId, 'content', txt)
 }
 
@@ -105,19 +104,32 @@ function downloadImg(elLink) {
     drawImg()
 }
 
+
+
+function resizeCanvasForDownload(canvas) {
+    var imgSrc = getImgSrc()
+    var imgObj = new Image();
+    imgObj.src = imgSrc;
+    canvas.width = imgObj.width
+    canvas.height = imgObj.height
+}
+
+
+
 function addCanvasTxt() {
-    for (let i = 1; i < gNumOfTxtLines + 1; i++) {
-        var txtId = ''+ i
+   
+    var elTxts = document.querySelectorAll('.meme-txt')
+    for (let i = 0; i < gNumOfTxtLines; i++) {
+        var txtId = (i + 1) + ''
         var txt = getTxt(txtId)
-        console.log(txt)
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
         gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
         gCtx.shadowColor = '#000000'
         gCtx.shadowBlur = 1;
-        //need to set position and shadow
-        //need to get div location
-        var xLocation = 30 + i*10 //left point where text start
-        var yLocation = 30 + i*10 //bottom point where text start
+
+        var elCanvas = document.querySelector('#meme-canvas')
+        var xLocation = elTxts[i].offsetLeft - elCanvas.offsetLeft
+        var yLocation = elTxts[i].offsetTop -elCanvas.offsetTop + elTxts[i].offsetHeight
         gCtx.fillText(txt, xLocation, yLocation);
     }
 }
@@ -135,14 +147,10 @@ function addCanvasTxt() {
 //     var xLocation = 30 //left point where text start
 //     var yLocation = 30 //bottom point where text start
 //     console.log(gCtx);
-    
+
 //     gCtx.fillText(txt, xLocation, yLocation);
 // }
 
-function onBackToGallery() {
-    document.querySelector('section.editor').classList.add('hide');
-    document.querySelector('section.gallery').classList.remove('hide');
-}
 
 //Hadas:
 // reset input text when new pic - done
@@ -166,3 +174,60 @@ function onBackToGallery() {
 //change font size to range
 //change text lines way of rendering
 // add painter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function dragStart(event) {
+//     event.dataTransfer.setData("Text", event.target.id);
+//   }
+// function allowDrop(event) {
+//     event.preventDefault();
+//   }
+
+//   function drop(event) {
+//     event.preventDefault();
+//     var data = event.dataTransfer.getData("Text");
+//     console.log(data)
+//     // event.target.appendChild(document.getElementById(data));
+//   }
+
+// function onBackToGallery() {
+//     document.querySelector('section.editor').classList.add('hide');
+//     document.querySelector('section.gallery').classList.remove('hide');
+// }

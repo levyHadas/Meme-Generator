@@ -61,14 +61,14 @@
             </div>
         </div>
         <div class="canvas-container">
-            <div class="meme-txt-container" onclick="setInFocusTxtId(this)">
-                    <p contenteditable="true" class="meme-txt txt-1 editable-txt" data-id="1" autofocus oninput="onTextEdit(this)" onblur="onEndTyping(this)"></p>
+            <div class="meme-txt-container" onclick="setInFocusTxtId(this)" >
+                    <p contenteditable="true" class="meme-txt txt-1 editable-txt" data-id="1" autofocus draggable="true" 
+                    ondragstart="dragStart(event)" oninput="onTextEdit(this)" onblur="onEndTyping(this)"></p>
             </div>
             <div class="meme-txt-container" onclick="setInFocusTxtId(this)">
                     <p contenteditable="true" class="meme-txt txt-2 editable-txt" data-id="2" autofocus oninput="onTextEdit(this)" onblur="onEndTyping(this)"></p>
             </div>
-            <div class="meme-txt txt-2"></div>
-            <canvas id="meme-canvas"></canvas>
+            <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
         </div>
         <img class="canvas-img" src="" hidden alt="">
         <div class="control-panel">
