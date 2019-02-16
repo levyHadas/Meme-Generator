@@ -4,6 +4,8 @@ var gNumOfTxtLines = 2
 var gInFocusTxtId = '1'
 
 function initEditor(meme) {
+    var elTxts = document.querySelectorAll('.meme-txt')
+    elTxts.forEach(txt => txt.parentElement.classList.remove('hidden'))
     var imgSrc = meme.src
     var txts = document.querySelectorAll('.meme-txt')
     txts.forEach((txt) => txt.innerText = '  ')
@@ -141,7 +143,8 @@ function addCanvasTxt() {
 }
 
 function onDelete(elTxt) {
-    elTxt.parentElement.style.display = 'none'
+    
+    elTxt.parentElement.classList.add('hidden')
     setTxtSettings(elTxt.dataset.id, 'content')
 }
 

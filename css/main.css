@@ -263,6 +263,10 @@ section.main {
     z-index: 2;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (min-width: 892px) {
     .modal h2 {
         margin: 40px 80px;
