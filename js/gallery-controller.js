@@ -27,6 +27,7 @@ function onGalleryItemClicked(elItem) {
 }
 
 function onSearchInput(val) {
+    renderAutocomplete(val);
     filterMemes(val);
     renderGallery();
 }
@@ -46,9 +47,47 @@ function onSubmitNewMeme(ev, elForm) {
 }
 
 function onCloseModal() {
-    document.querySelector('.modal').classList.add('hide');
+    //close all modals
+    [].forEach.call(document.querySelectorAll('.modal'), (modal => modal.classList.add('hide')));
 }
 
 function onDisplaySearch() {
-    document.querySelector('.search-bar').classList.toggle('hidden');
+    document.querySelector('.search-input-container').classList.toggle('hidden');
+}
+
+function onOpenTagModal() {
+    var elTagsModal = document.querySelector('.modal.tags');
+    var tagsMap = getTagsMap();
+    var strHtml = '';
+    for (var tag in tagsMap) {
+        strHtml += `<div class="tags-item" onclick="onTagClicked('${tag}')" style="display: inline-block; font-size: ${(tagsMap[tag] + 3) * 3}px">${tag}</div>`
+    }
+    elTagsModal.querySelector('.tags-area').innerHTML = strHtml;
+    elTagsModal.classList.remove('hide');
+}
+
+function onTagClicked(tag) {
+    onCloseModal();
+    document.querySelector('.search-bar').classList.remove('hidden');
+    document.querySelector('.search-bar input').value = tag;
+    onSearchInput(tag);
+}
+
+function renderAutocomplete(val) {
+    var elAutoComp = document.querySelector('.autocomplete');
+    if (!val) elAutoComp.classList.add('hide');
+    else elAutoComp.classList.remove('hide');
+    var regex = new RegExp('^' + val, 'i');
+    var strHtml = '';
+    var memeNames = getMemeNameList();
+    memeNames = memeNames.filter(memeName => {
+        return regex.test(memeName);
+    });
+    memeNames.sort((memeName1, memeName2) => {
+        return memeName1 > memeName2 ? 1 : -1;
+    })
+    memeNames.forEach(memeName => {
+        strHtml += `<hr><div class="autocomplete-item">${memeName}</div>`
+    });
+    elAutoComp.innerHTML = strHtml;
 }

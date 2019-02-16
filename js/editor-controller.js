@@ -126,13 +126,15 @@ function addCanvasTxt() {
         gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
         gCtx.shadowColor = '#000000'
         gCtx.shadowBlur = 1;
-
+        gCtx.textBaseline = 'bottom'
         var elCanvas = document.querySelector('#meme-canvas')
         // var xLocation = elTxts[i].offsetLeft - elCanvas.offsetLeft
         // var yLocation = elTxts[i].offsetTop -elCanvas.offsetTop + elTxts[i].offsetHeight
         var xLocation = elTxts[i].offsetLeft
         var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight
         gCtx.fillText(txt, xLocation, yLocation);
+        console.log(gCtx);
+        
     }
 }
 // function addCanvasTxt(txtId = 'top') {
