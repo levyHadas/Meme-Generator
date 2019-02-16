@@ -60,8 +60,9 @@ function renderTxt(txtId, txt = null) {
     if (txtId === '1') var elTextPlace = document.querySelector('.txt-1')
     else var elTextPlace = document.querySelector('.txt-2')
     if (txt) elTextPlace.innerText = txt;
-    elTextPlace.style.color = getTxtSettings(txtId, 'color')
-    elTextPlace.style.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+    elTextPlace.style.color = getTxtSettings(txtId, 'color');
+    elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
+    elTextPlace.style.height = getTxtSettings(txtId, 'size');
 }
 
 
@@ -117,7 +118,6 @@ function resizeCanvasForDownload(canvas) {
 
 
 function addCanvasTxt() {
-   
     var elTxts = document.querySelectorAll('.meme-txt')
     for (let i = 0; i < gNumOfTxtLines; i++) {
         var txtId = (i + 1) + ''
@@ -128,8 +128,10 @@ function addCanvasTxt() {
         gCtx.shadowBlur = 1;
 
         var elCanvas = document.querySelector('#meme-canvas')
-        var xLocation = elTxts[i].offsetLeft - elCanvas.offsetLeft
-        var yLocation = elTxts[i].offsetTop -elCanvas.offsetTop + elTxts[i].offsetHeight
+        // var xLocation = elTxts[i].offsetLeft - elCanvas.offsetLeft
+        // var yLocation = elTxts[i].offsetTop -elCanvas.offsetTop + elTxts[i].offsetHeight
+        var xLocation = elTxts[i].offsetLeft
+        var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight
         gCtx.fillText(txt, xLocation, yLocation);
     }
 }
