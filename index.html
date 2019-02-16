@@ -18,11 +18,17 @@
         <div class="top-bar">
             <h2>Select Meme Image</h2>
             <div class="btns-container flex space-between align-center">
-                <div class="search-bar hidden">
-                    <button class="search-btn btn" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
-                    <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes">
+                <div class="filter-bar flex">
+                    <button class="tags-btn btn" title="Tags" onclick="onOpenTagModal()"><i class="fas fa-hashtag"></i></button>
+                    <div class="search-bar flex align-center">
+                        <button class="search-btn btn" title="Search Meme" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
+                        <div class="search-input-container hidden">
+                            <div class="autocomplete"></div>
+                            <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes"/>
+                        </div>
+                    </div>
                 </div>
-                <button class="add-meme btn" onclick="onAddMeme()"><i class="fas fa-plus"></i></button>
+                <button class="add-meme btn" title="Add Meme" onclick="onAddMeme()"><i class="fas fa-plus"></i></button>
             </div>
         </div>
         <div class="modal add-meme hide flex column align-center">
@@ -42,6 +48,12 @@
                     <button onclick="onCloseModal()" class="btn">Cancel</button>
                 </div>
             </form>
+        </div>
+        <div class="modal tags hide">
+            <div class="tags-area"></div>
+            <div class="btns-area flex align-center space-around">
+                <button onclick="onCloseModal()" class="btn">Cancel</button>
+            </div>
         </div>
         <div class="img-gallery grid">
         </div>

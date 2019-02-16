@@ -45,7 +45,6 @@ section.main {
     height: 118px;
     position: relative;
     background-color: rgb(122, 62, 62);
-    margin-bottom: 20px;
     align-items: flex-end;
     padding-top: 10px;
 }
@@ -53,17 +52,6 @@ section.main {
 .top-bar h2 {
     text-align: center;
     margin: 0 0 10px;
-}
-
-.search-bar {
-    white-space: nowrap;
-    width: 200px;
-    transition: .3s;
-    overflow: hidden;
-}
-
-.search-bar.hidden {
-    width: 50px;
 }
 
 .btns-container {
@@ -99,6 +87,35 @@ section.main {
 .gallery .top-bar button {
     width: 48px;
     font-size: 130%;
+}
+
+.search-input-container {
+    position: relative;
+    transition: .3s;
+    width: 300px;
+}
+
+.search-input-container.hidden {
+    width: 0;
+
+}
+
+.filter-bar button {
+    margin-right: 5px;
+}
+
+.search-bar input {
+    border: none;
+    width: 160px;
+}
+
+.autocomplete {
+    background-color: white;
+    width: 160px;
+    position: absolute;
+    top: 21px;
+    overflow-x: hidden;
+    z-index: 1;
 }
 
 .img-gallery {
@@ -238,7 +255,7 @@ section.main {
 }
 
 .modal {
-    background-color: rgb(182, 106, 106);
+    background-color: rgba(182, 106, 106, 0.89);
     position: fixed;
     top: 0;
     width: 100%;
@@ -261,7 +278,6 @@ section.main {
     }
     
     .modal {
-        position: absolute;
         width: 500px;
         height: 500px;
         left: 50%;
@@ -358,6 +374,20 @@ a.download {
     text-align: center;
 }
 
+.modal.tags >* {
+    padding: 20px;
+}
+
+.modal.tags .tags-area {
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.tags-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
 .delete {
     position: relative;
     line-height: 48px;
@@ -371,17 +401,6 @@ a.download {
     display: none;
 }
 
-
-
-/* .meme-txt:focus > .meme-txt-container {
-    outline: none;
-} */
-
-/* .meme-txt-container {
-    position: relative;
-    padding: 0;
-    margin: 0;
-} */
-
-
-
+.tags-item:hover {
+    color: brown;
+}

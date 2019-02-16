@@ -1,4 +1,3 @@
-
 'use strict';
 var gCtx
 var gNumOfTxtLines = 2
@@ -123,11 +122,14 @@ function addCanvasTxt() {
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
         gCtx.shadowColor = '#000000'
         gCtx.shadowBlur = 1;
+        gCtx.textBaseline = 'bottom'
         var xLocation = elTxts[i].offsetLeft
         var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight - 55 //padding
         if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth/2 - getTxtWidth(txt, font)/2
         else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
         gCtx.fillText(txt, xLocation, yLocation);
+        console.log(gCtx);
+        
     }
 }
 
@@ -177,56 +179,7 @@ function getTxtWidth(txt, font) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function dragStart(event) {
-//     event.dataTransfer.setData("Text", event.target.id);
-//   }
-// function allowDrop(event) {
-//     event.preventDefault();
-//   }
-
-//   function drop(event) {
-//     event.preventDefault();
-//     var data = event.dataTransfer.getData("Text");
-//     console.log(data)
-//     // event.target.appendChild(document.getElementById(data));
-//   }
-
-// function onBackToGallery() {
-//     document.querySelector('section.editor').classList.add('hide');
-//     document.querySelector('section.gallery').classList.remove('hide');
-// }
+function onBackToGallery() {
+    document.querySelector('section.editor').classList.add('hide');
+    document.querySelector('section.gallery').classList.remove('hide');
+}
