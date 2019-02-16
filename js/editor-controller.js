@@ -12,6 +12,10 @@ function initEditor(meme) {
     //in the futur, add disaplay none here. the text box will only show after the button to add text is clicked
     resetCanvasState()
     initCanvas(imgSrc)
+    var p = document.document.querySelector('meme-txt');
+    setTimeout(function() {
+    p.focus();
+}, 0);
 }
 
 function setInFocusTxtId(txtContainer) {
