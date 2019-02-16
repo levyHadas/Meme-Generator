@@ -289,18 +289,7 @@ section.main {
     margin: 0 auto;
 }
 
-.meme-txt {
-    position: absolute;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2rem;
-    text-shadow: 0 0 1px black;
-    /* padding: 15px; */
-    /* min-height: 40px; */
-    min-width: 20px;
-    line-height: 48px;
-    display: inline-block;
-}
+
 
 .btn {
     border: none;
@@ -310,17 +299,17 @@ section.main {
     height: 48px;
     padding: 0 10px;
     cursor: pointer;
+    outline: none;
 }
 
 a.download {
     font-size: inherit;
     text-decoration: none;
     color: rgb(255, 222, 212);
+    padding: 15px 20px;
 }
 
-.bottom-txt {
-    bottom: 60%;
-}
+
 
 .share-container {
     background-color: #4267b2;
@@ -335,21 +324,50 @@ a.download {
 }
 
 .txt-2 {
-    top: 50%;
+    top: 250px;
+    left: 30px;
+    /* temp - this should be initial location */
+}
+.txt-1 {
+    top: 20px;
+    left: 30px;
     /* temp - this class will not exist  */
 }
 
+
+
 .meme-txt-container {
-    position: relative;
-    padding: 0;
-    margin: 0;
+    position: absolute;
 }
 
-/* .meme-txt-container {
-    position: absolute;
-    border: 1px solid white;
+.meme-txt {
+    outline: 1px solid white;
+    font-size: 2rem;
+    min-width: 20px;
+    text-shadow: 0 0 1px black;
+    line-height: 48px;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    padding: 0;
 }
-.meme-txt-container p {
+
+.delete {
+    position: relative;
+    line-height: 48px;
+    font-size: 1.5rem;
+    background-color: aliceblue;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+
+
+/* .meme-txt:focus > .meme-txt-container {
+    outline: none;
+} */
+
+/* .meme-txt-container {
     position: relative;
     padding: 0;
     margin: 0;
