@@ -1,4 +1,4 @@
-
+'use strict';
 var gCanvasState
 resetCanvasState()
 
@@ -23,8 +23,8 @@ function getTxtSettings (id, property) {
 }
 
 function findTxtById(id) {
-    var temp = gCanvasState.txt.find( (temp) => temp.id === id)
-    return temp
+    var txt = gCanvasState.txt.find( (temp) => temp.id === id)
+    return txt
 
 }
 
@@ -40,3 +40,5 @@ function createTxtData(id) {
             font: 'impact',
             size: '3rem'}
 }
+
+
