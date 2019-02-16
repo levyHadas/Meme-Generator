@@ -104,8 +104,6 @@ function downloadImg(elLink) {
     drawImg()
 }
 
-
-
 function resizeCanvasForDownload(canvas) {
     var imgSrc = getImgSrc()
     var imgObj = new Image();
@@ -113,8 +111,6 @@ function resizeCanvasForDownload(canvas) {
     canvas.width = imgObj.width
     canvas.height = imgObj.height
 }
-
-
 
 function addCanvasTxt() {
    
