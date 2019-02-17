@@ -53,6 +53,15 @@ function onCloseModal() {
 
 function onDisplaySearch() {
     document.querySelector('.search-input-container').classList.toggle('hidden');
+    document.querySelector('.search-return').classList.remove('hide');
+    [].forEach.call(document.querySelectorAll('.gallery .top-bar button'), (button => button.classList.add('hidden-on-mobile')));
+    document.querySelector('.search-return').classList.remove('hidden-on-mobile');
+}
+
+function onSearchReturn() {
+    document.querySelector('.search-input-container').classList.toggle('hidden');
+    document.querySelector('.search-return').classList.add('hide');
+    [].forEach.call(document.querySelectorAll('.gallery .top-bar button'), (button => button.classList.remove('hidden-on-mobile')));
 }
 
 function onOpenTagModal() {

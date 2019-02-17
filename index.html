@@ -22,6 +22,9 @@
                     <button class="tags-btn btn" title="Tags" onclick="onOpenTagModal()"><i class="fas fa-hashtag"></i></button>
                     <div class="search-bar flex align-center">
                         <button class="search-btn btn" title="Search Meme" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
+                        <button class="search-return hide btn" onclick="onSearchReturn()">
+                                ←
+                        </button>
                         <div class="search-input-container hidden">
                             <div class="autocomplete"></div>
                             <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes"/>

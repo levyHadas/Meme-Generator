@@ -84,15 +84,33 @@ section.main {
     }
 }
 
+.hidden-on-mobile {
+    display: none;
+}
+
+@media (min-width: 692px) {
+    .hidden-on-mobile {
+        display: unset;
+    }
+
+    .search-return {
+        display: none;
+    }
+
+    .search-input-container {
+        transition: .3s;
+    }
+}
+
 .gallery .top-bar button {
     width: 48px;
     font-size: 130%;
 }
 
 .search-input-container {
+    overflow: hidden;
     position: relative;
-    transition: .3s;
-    width: 300px;
+    width: 160px;
 }
 
 .search-input-container.hidden {
