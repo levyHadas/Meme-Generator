@@ -41,6 +41,7 @@ function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
     gCtx = canvas.getContext('2d')
     drawImg()
     resizeCanvas(canvas)
+    gCtx.scale(1,1);
 }
 
 
@@ -143,6 +144,9 @@ function addCanvasTxt() {
         gCtx.font = font
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
         gCtx.strokeStyle = 'black';
+        gCtx.lineWidth = 2
+        // gCtx.shadowColor = '#000000'
+        // gCtx.shadowBlur = 2;
         gCtx.textBaseline = 'bottom'
         var xLocation = elTxts[i].offsetLeft
         var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight

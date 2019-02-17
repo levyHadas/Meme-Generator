@@ -85,8 +85,15 @@
                 <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
             </div>
             <div class="control-panel flex wrap align-center">
-                <button class="btn add" onclick=onAdd()>Add</button>
-                <button class="btn delete" onclick=onDelete()>Delete</button>
+                <div class="add-delete-lines flex">
+                    <button class="btn add" onclick=onAdd()><i class="fas fa-plus"></i></button>
+                    <button class="btn delete" onclick=onDelete()><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div class="align-btns flex">
+                        <button class="btn align-left" value="left" data-type="align" onclick="onDisplayChange(this)"><i class="fas fa-align-left"></i></button>
+                        <button class="btn align-center" value="center" data-type="align" onclick="onDisplayChange(this)"><i class="fas fa-align-center"></i></button>
+                        <button class="btn align-right" value="right" data-type="align" onclick="onDisplayChange(this)"><i class="fas fa-align-right"></i></button>       
+                </div>
                 <label class="color-label btn"> Color:
                     <input type="color" class="txt-display color-picker" value="#FFFFFF" data-type="color"
                         onchange="onDisplayChange(this)">
@@ -103,11 +110,11 @@
                     <option value="54">54 px</option>
                     <option value="60">60 px</option>
                 </select>
-                <select class="txt-display btn" data-type="align" onchange="onDisplayChange(this)">
+                                <!-- <select class="txt-display btn" data-type="align" onchange="onDisplayChange(this)">
                     <option value="center" selected>center</option>
                     <option value="right">right</option>
                     <option value="left">left</option>
-                </select>
+                </select> -->
                 <select class="txt-display btn font-picker" data-type="font" onchange="onDisplayChange(this)">
                     <option value="Arial">Arial</option>
                     <option value="Avant Garde">Avant Garde</option>
@@ -122,11 +129,11 @@
                     <option value="Trebuchet MS">Trebuchet MS</option>
                     <option value="Verdana">Verdana</option>
                 </select>
-                <div class="movment-btns flex wrap">
-                    <button class="btn btn-small" data-to="left" onclick="moveTxt(this.dataset.to)" >←</button>
-                    <button class="btn btn-small" data-to="right" onclick="moveTxt(this.dataset.to)">→</button>
-                    <button class="btn btn-small" data-to="up" onclick="moveTxt(this.dataset.to)">↑</button>
-                    <button class="btn btn-small" data-to="down" onclick="moveTxt(this.dataset.to)">↓</button>
+                <div class="movment-btns">
+                    <button class="btn btn-small" data-to="up" onclick="moveTxt(this.dataset.to)"><i class="fas fa-arrow-up"></i></button>
+                    <button class="btn btn-small" data-to="left" onclick="moveTxt(this.dataset.to)" ><i class="fas fa-arrow-left"></i></button>
+                    <button class="btn btn-small" data-to="right" onclick="moveTxt(this.dataset.to)"><i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-small" data-to="down" onclick="moveTxt(this.dataset.to)"><i class="fas fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>

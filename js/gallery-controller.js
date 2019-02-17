@@ -96,7 +96,14 @@ function renderAutocomplete(val) {
         return memeName1 > memeName2 ? 1 : -1;
     })
     memeNames.forEach(memeName => {
-        strHtml += `<hr><div class="autocomplete-item">${memeName}</div>`
+        strHtml += `<hr><div class="autocomplete-item" onclick="onAutocompleteClicked(this)">${memeName}</div>`
     });
     elAutoComp.innerHTML = strHtml;
+}
+
+function onAutocompleteClicked(el) {
+    document.querySelector('.search-bar').classList.remove('hidden');
+    document.querySelector('.search-bar input').value = el.innerHTML;
+    onSearchInput(el.innerHTML);
+    document.querySelector('.autocomplete').classList.add('hide');
 }
