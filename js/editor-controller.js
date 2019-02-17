@@ -189,7 +189,7 @@ function onDelete(inFocusId = gInFocusTxtId) {
 function onAdd() {
     var hiddenTxtId = getHiddenTxtId()
     if (hiddenTxtId) {
-        console.log(hiddenTxtId)
+        // console.log(hiddenTxtId)
         setTxtSettings(hiddenTxtId, 'visible', true)
         var elTxt = document.querySelector(`.meme-txt[data-id="${hiddenTxtId}"]`)
         elTxt.classList.remove('hidden')
@@ -216,7 +216,7 @@ function addCustomTxtBox() {
 
     document.querySelector('.canvas-container').innerHTML = strHtml;
     var newDiv = document.querySelector(`[data-id="${txtId}"]`);
-    console.log(newDiv);
+    // console.log(newDiv);
 
     var div1 = document.querySelector('[data-id="1"]');
     var div2 = document.querySelector('[data-id="2"]');
@@ -234,7 +234,7 @@ function addCustomTxtBox() {
     setInFocusTxt(txtId)
     renderTxt(txtId)
 
-    console.log(gInFocusTxtId)
+    // console.log(gInFocusTxtId)
 
 }
 
@@ -286,7 +286,6 @@ function moveTxt(direction) {
 }
 
 function onStartDrag(ev, el) {
-    console.log(ev);
     gDragState.isDragging = true;
     gDragState.dragStartPos.left = el.offsetLeft;
     gDragState.dragStartPos.top = el.offsetTop;
@@ -295,6 +294,9 @@ function onStartDrag(ev, el) {
 }
 
 function onDrag(ev, el) {
+    console.log(ev);
+    
+    ev.preventDefault();
     if (gDragState.isDragging) {
         var clientX = ev.clientX || ev.touches[0].clientX;
         var clientY = ev.clientY || ev.touches[0].clientY;
