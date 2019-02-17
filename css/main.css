@@ -395,6 +395,11 @@ a.download {
     outline: 4px solid white;
 }
 
+.custom-box {
+    top: 100px;
+    
+}
+
 
 .color-picker {
     width: 30px;

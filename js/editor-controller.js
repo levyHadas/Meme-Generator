@@ -1,7 +1,7 @@
 'use strict';
 var gCtx
 var gNumOfTxtLines = 2
-var gDragState = {isDragging: false, clickPos: {x: 0, y: 0}, dragStartPos: {left: 0, top: 0}}
+var gDragState = { isDragging: false, clickPos: { x: 0, y: 0 }, dragStartPos: { left: 0, top: 0 } }
 var gInFocusTxtId
 
 function initEditor(meme) {
@@ -18,7 +18,7 @@ function initEditor(meme) {
 function setInFocusTxt(txtId) {
     var elTxts = document.querySelectorAll(`.meme-txt`)
     elTxts.forEach((txt) => txt.classList.remove('focus'))
-    
+
     var elTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
     elTxt.classList.add('focus')
     elTxt.focus()
@@ -49,9 +49,9 @@ function drawImg() {
 function resizeCanvas(canvas) {
     var elCanvasContainer = document.querySelector('.canvas-container')
     var containerHeight = setCanvasContainerSize(elCanvasContainer)
-    setRelativeHeights(containerHeight)
     canvas.width = elCanvasContainer.offsetWidth
-    canvas.height = elCanvasContainer.offsetHeight
+    canvas.height = containerHeight
+    setRelativeHeights(containerHeight)
 }
 
 function setCanvasContainerSize(elCanvasContainer) {
@@ -67,14 +67,14 @@ function setCanvasContainerSize(elCanvasContainer) {
 }
 
 function setRelativeHeights(containerHeight) {
-    document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px' 
+    document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px'
     document.querySelector('.flex-container').style.height = (containerHeight) + 'px'
 }
 
 
 function renderTxt(txtId, txt = null) {
-    if (txtId === '1') var elTextPlace = document.querySelector('[data-id="1"]')
-    else var elTextPlace = document.querySelector('[data-id="2"]')
+    // if (txtId === '1') var elTextPlace = document.querySelector('[data-id="1"]')
+    var elTextPlace = document.querySelector(`[data-id="${txtId}"]`)
     if (txt) elTextPlace.innerText = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
@@ -129,7 +129,7 @@ function resizeCanvasForDownload(canvas) {
 
 function addCanvasTxt() {
     var elTxts = document.querySelectorAll('.meme-txt')
-    for (let i = 0; i < gNumOfTxtLines; i++) {
+    for (let i = 0; i < elTxts.length; i++) {
         var txtId = (i + 1) + ''
         var txt = getTxt(txtId)
         var font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
@@ -139,46 +139,68 @@ function addCanvasTxt() {
         gCtx.shadowBlur = 1;
         gCtx.textBaseline = 'bottom'
         var xLocation = elTxts[i].offsetLeft
-        var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight - 55 //padding
+        var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight
         if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
         else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
         gCtx.fillText(txt, xLocation, yLocation);
-        console.log(gCtx);
-
     }
 }
 
 function onDelete() {
     var elTxt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
-    elTxt.classList.add('hidden')
-    elTxt.classList.remove('focus')
-    elTxt.innerText = ''
-    setTxtSettings(gInFocusTxtId, 'content','')
-    //set focus to remaining text
-    var elTxts = document.querySelectorAll(`.meme-txt`)
-    // elTxts.forEach((txt) => {
-    //     if (!txt.classList.contains('hidden')){
-    //         setInFocusTxt(txt.dataset.id)
-    //         return
-    //     }
-    // })
-    elTxts = Array.from(elTxts)
-    var remainTxt = elTxts.find(txt => !txt.classList.contains('hidden'))
-    if (remainTxt) setInFocusTxt(remainTxt.dataset.id)
+    if (gInFocusTxtId > 2) { //if this is a custom txt box, remove it
+        elTxt.outerHTML = ''
+        deleteTxt(gInFocusTxtId)
+    } else {
+        elTxt.classList.add('hidden')
+        elTxt.classList.remove('focus')
+        elTxt.innerText = ''
+        setTxtSettings(gInFocusTxtId, 'content', '')
+        setTxtSettings(gInFocusTxtId, 'visible', false)
+    }
+    //set focus to displayed text
+    var remainTxtId = getVisibaleTxtId()
+    if (remainTxtId) setInFocusTxt(remainTxtId)
 
 }
 
 function onAdd() {
-    var elTxts = document.querySelectorAll(`.meme-txt`)
-    elTxts = Array.from(elTxts)
-    var exisTxtEl = elTxts.find(txt => txt.classList.contains('hidden'))
-    if (exisTxtEl) {
-        exisTxtEl.classList.remove('hidden')
-        setInFocusTxt(exisTxtEl.dataset.id)
+    var hiddenTxtId = getHiddenTxtId()
+    if (hiddenTxtId) {
+        console.log(hiddenTxtId)
+        setTxtSettings(hiddenTxtId, 'visible', true)
+        var elTxt = document.querySelector(`.meme-txt[data-id="${hiddenTxtId}"]`)
+        elTxt.classList.remove('hidden')
+        setInFocusTxt(hiddenTxtId)
     } else {
-        //render new element giv it class - not-defualt
+        addCustomTxtBox()
         //on delete if class is not-defualt ----> remove it entierly and don't hide
     }
+}
+
+function addCustomTxtBox() {
+    var txtId = '' + (gCanvasState.txt.length + 1)
+    var elTxts = document.querySelectorAll('.meme-txt')
+    elTxts = Array.from(elTxts)
+    var strHtml = ''
+    
+    elTxts.forEach(txt => strHtml += txt.outerHTML)
+
+    strHtml += `<div contenteditable="true" class="meme-txt custom-box" data-id="${txtId}" oninput="onTxtEdit(this)" 
+    onmousedown="onStartDrag(event, this)" onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" 
+    onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)"></div>`
+    
+    strHtml += document.querySelector('#meme-canvas').outerHTML
+    
+    document.querySelector('.canvas-container').innerHTML = strHtml
+    
+    setNewTxt()
+    initCanvas(getImgSrc())
+    setInFocusTxt(txtId)
+    renderTxt(txtId)
+
+    console.log(gInFocusTxtId)
+
 }
 
 function getTxtWidth(txt, font) {
@@ -189,7 +211,7 @@ function getTxtWidth(txt, font) {
     return ctx.measureText(txt).width
 }
 
-function OnKeyMove(ev){
+function OnKeyMove(ev) {
     switch (ev.code) {
         case 'ArrowLeft':
             moveTxt('left')
@@ -240,7 +262,7 @@ function onStartDrag(ev, el) {
 function onDrag(ev, el) {
     if (gDragState.isDragging) {
         var xChange = ev.clientX - gDragState.clickPos.x;
-        var yChange = ev.clientY - gDragState.clickPos.y;        
+        var yChange = ev.clientY - gDragState.clickPos.y;
         el.style.top = (gDragState.dragStartPos.top + yChange) + 'px';
         el.style.left = (gDragState.dragStartPos.left + xChange) + 'px';
     }

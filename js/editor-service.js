@@ -12,6 +12,7 @@ function getImgSrc() {
 }
 
 function setTxtSettings(id, property, value) {
+    console.log(id)
     var currTxt = findTxtById(id)
     if (property !== 'size') currTxt[property] = value
     else  currTxt[property] = value + 'px'
@@ -40,12 +41,31 @@ function createTxtData(id) {
             font: 'impact',
             size: '3rem',
             align:'center',
-            visible: true}
+            visible: true,
+            default: true}
 }
 
 
 function getVisibaleTxtId() {
-    visibleTxt = gCanvasState.txt.find(txt => txt[visible] === true)
-    return visibleTxt[id]
+    var visibleTxt = gCanvasState.txt.find(txt => txt.visible)
+    if(!visibleTxt) return null
+    return visibleTxt.id
+}
+function getHiddenTxtId() {
+    var hiddenTxt = gCanvasState.txt.find(txt => (!txt.visible) && txt.default)
+    if (!hiddenTxt) return null
+    return hiddenTxt.id
+}
+
+function setNewTxt() {
+    var id = '' + (gCanvasState.txt.length + 1)
+    gCanvasState.txt.push(createTxtData(id))
+}
+
+function deleteTxt(id) {
+    var txts = gCanvasState.txt
+    var idxToRemove = txts.findIndex(txt => txt.id === id)
+    gCanvasState.txt.splice(idxToRemove,1)
+    console.log(gCanvasState)
 }
 
