@@ -295,6 +295,7 @@ function onStartDrag(ev, el) {
 }
 
 function onDrag(ev, el) {
+    ev.preventDefault();
     if (gDragState.isDragging) {
         var clientX = ev.clientX || ev.touches[0].clientX;
         var clientY = ev.clientY || ev.touches[0].clientY;
