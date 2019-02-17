@@ -324,7 +324,15 @@ function onChangeColor() {
     document.querySelector('.color-picker').click();
 }
 
+function onShowSettingContainer(ev) {
+    ev.stopPropagation();
+    document.querySelector('.setting-container').classList.remove('remove-on-mobile');
+}
 
+function onHideSettingContainer(ev) {
+    ev.stopPropagation();
+    document.querySelector('.setting-container').classList.add('remove-on-mobile');
+}
 
 //TODO: arrange functions in logical order
 
