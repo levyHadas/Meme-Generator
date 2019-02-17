@@ -10,12 +10,21 @@ function initEditor(meme) {
     resetTxtBoxs()
     initCanvas(imgSrc)
     setInFocusTxt('1')
+    var div1 = document.querySelector('[data-id="1"]');
+    var div2 = document.querySelector('[data-id="2"]');
+    div1.addEventListener("touchstart", function () { onStartDrag(event, div1) }, false);
+    div1.addEventListener("touchend", function () { onStopDrag() }, false);
+    div1.addEventListener("touchmove", function () { onDrag(event, div1) }, false);
+    div2.addEventListener("touchstart", function () { onStartDrag(event, div2) }, false);
+    div2.addEventListener("touchend", function () { onStopDrag() }, false);
+    div2.addEventListener("touchmove", function () { onDrag(event, div2) }, false);
 }
 
 function resetTxtBoxs() {
     var elTxtBoxs = document.querySelectorAll('.meme-txt')
     elTxtBoxs.forEach(txt => txt.classList.remove('hidden'))
-    elTxtBoxs.forEach((txt) => {txt.innerText = ''
+    elTxtBoxs.forEach((txt) => {
+        txt.innerText = ''
         txt.style.top = ''
         txt.style.left = ''
     })
@@ -41,7 +50,7 @@ function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
     gCtx = canvas.getContext('2d')
     drawImg()
     resizeCanvas(canvas)
-    gCtx.scale(1,1);
+    gCtx.scale(1, 1);
 }
 
 
@@ -152,7 +161,7 @@ function addCanvasTxt() {
         var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight
         if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
         else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
-        gCtx.strokeText (txt, xLocation, yLocation)
+        gCtx.strokeText(txt, xLocation, yLocation)
         gCtx.fillText(txt, xLocation, yLocation);
     }
 }
@@ -196,17 +205,30 @@ function addCustomTxtBox() {
     var elTxts = document.querySelectorAll('.meme-txt')
     elTxts = Array.from(elTxts)
     var strHtml = ''
-    
+
     elTxts.forEach(txt => strHtml += txt.outerHTML)
 
     strHtml += `<div contenteditable="true" class="meme-txt custom-box" data-id="${txtId}" oninput="onTxtEdit(this)" 
     onmousedown="onStartDrag(event, this)" onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" 
     onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)"></div>`
-    
-    strHtml += document.querySelector('#meme-canvas').outerHTML
-    
-    document.querySelector('.canvas-container').innerHTML = strHtml
-    
+
+    strHtml += document.querySelector('#meme-canvas').outerHTML;
+
+    document.querySelector('.canvas-container').innerHTML = strHtml;
+    var newDiv = document.querySelector(`[data-id="${txtId}"]`);
+    console.log(newDiv);
+
+    var div1 = document.querySelector('[data-id="1"]');
+    var div2 = document.querySelector('[data-id="2"]');
+    div1.addEventListener("touchstart", function () { onStartDrag(event, div1) }, false);
+    div1.addEventListener("touchend", function () { onStopDrag() }, false);
+    div1.addEventListener("touchmove", function () { onDrag(event, div1) }, false);
+    div2.addEventListener("touchstart", function () { onStartDrag(event, div2) }, false);
+    div2.addEventListener("touchend", function () { onStopDrag() }, false);
+    div2.addEventListener("touchmove", function () { onDrag(event, div2) }, false);
+    newDiv.addEventListener("touchstart", function () { onStartDrag(event, newDiv) }, false);
+    newDiv.addEventListener("touchend", function () { onStopDrag() }, false);
+    newDiv.addEventListener("touchmove", function () { onDrag(event, newDiv) }, false);
     setNewTxt()
     initCanvas(getImgSrc())
     setInFocusTxt(txtId)
@@ -264,17 +286,20 @@ function moveTxt(direction) {
 }
 
 function onStartDrag(ev, el) {
+    console.log(ev);
     gDragState.isDragging = true;
     gDragState.dragStartPos.left = el.offsetLeft;
     gDragState.dragStartPos.top = el.offsetTop;
-    gDragState.clickPos.x = ev.clientX;
-    gDragState.clickPos.y = ev.clientY;
+    gDragState.clickPos.x = ev.clientX || ev.touches[0].clientX;
+    gDragState.clickPos.y = ev.clientY || ev.touches[0].clientY;
 }
 
 function onDrag(ev, el) {
     if (gDragState.isDragging) {
-        var xChange = ev.clientX - gDragState.clickPos.x;
-        var yChange = ev.clientY - gDragState.clickPos.y;
+        var clientX = ev.clientX || ev.touches[0].clientX;
+        var clientY = ev.clientY || ev.touches[0].clientY;
+        var xChange = clientX - gDragState.clickPos.x;
+        var yChange = clientY - gDragState.clickPos.y;
         el.style.top = (gDragState.dragStartPos.top + yChange) + 'px';
         el.style.left = (gDragState.dragStartPos.left + xChange) + 'px';
     }
