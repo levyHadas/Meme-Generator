@@ -88,7 +88,6 @@ section.main {
 .top-bar {
     height: 68px;
     position: relative;
-    background-color: rgba(33, 47, 54);
     align-items: flex-end;
     padding-top: 10px;
 }
@@ -98,12 +97,7 @@ section.main {
     margin: 0 0 10px;
 }
 
-.btns-container {
-    /* top: 40px; */
-    padding: 10px 20px;
-    background-color: rgba(33, 47, 54, 0.95);
-    width: 100%;
-}
+
 
 @media (min-width: 892px) {
     .top-bar {
@@ -386,7 +380,6 @@ section.main {
 
 .btn {
     border: none;
-    background-color: rgb(22, 34, 39, 0.77);
     border-radius: 5px;
     color: white;
     height: 48px;
@@ -394,11 +387,15 @@ section.main {
     cursor: pointer;
     outline: none;
     font-size: 1rem;
-    border: 1.5px solid rgba(255, 255, 255, 0.14)
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    background-color: rgba(22, 34, 38, 0.62);
 }
 
-.control-panel .btn {
-    /* background-color: rgba(46, 46, 46, 0.62); */
+.btns-container {
+    background-color: rgba(46, 46, 46, 0.9);
+    padding: 10px 20px;
+    /* background-color: rgba(33, 47, 54, 0.95); */
+    width: 100%;
 }
 
 .btn-to-gallery {
@@ -532,11 +529,16 @@ a.download {
 }
 
 .control-panel {
-    background-color: rgb(38, 38, 38, 0.9);
-    padding: 10px 20px;
+    padding: 10px 10px;
     min-width: 200px;
     justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.76);
 }
+
+.control-panel .btn {
+    background-color: rgba(13, 13, 13, 0.9);
+}
+
 
 .add-delete-lines button, .align-btns button {
     width: 48px;
@@ -644,6 +646,22 @@ a.download {
     .hidden-on-desktop {
         display: none;
     }
+
+    .control-panel {
+        background-color: rgba(29, 29, 29, 0.8);
+        padding: 10px 10px;
+        min-width: 200px;
+    }
+    .btns-container {
+        background-color: rgba(33, 47, 54, 0.95);
+    }
+    .btn {
+        background-color: rgb(22, 34, 39, 0.77);
+    }
+    .control-panel .btn {
+        background-color: rgba(13, 13, 13, 0.36);
+    }
+
 }
 
 .wrap {
@@ -653,7 +671,3 @@ a.download {
 [data-id="2"] {
     top: calc(100% - 72px);
 }
-
-/* .fas option {
-    font-weight: 900;
-} */
