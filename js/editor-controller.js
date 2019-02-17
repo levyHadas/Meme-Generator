@@ -16,8 +16,13 @@ function initEditor(meme) {
 }
 
 function setInFocusTxt(txtId) {
-    var eTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
-    eTxt.focus()
+    var elTxts = document.querySelectorAll(`.meme-txt`)
+    elTxts.forEach((txt) => txt.classList.remove('focus'))
+    
+    var elTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
+    elTxt.classList.add('focus')
+    elTxt.focus()
+
     gInFocusTxtId = txtId
 }
 
@@ -43,8 +48,8 @@ function drawImg() {
 
 function resizeCanvas(canvas) {
     var elCanvasContainer = document.querySelector('.canvas-container')
-    setCanvasContainerSize(elCanvasContainer)
-    setRelativeHeights()
+    var containerHeight = setCanvasContainerSize(elCanvasContainer)
+    setRelativeHeights(containerHeight)
     canvas.width = elCanvasContainer.offsetWidth
     canvas.height = elCanvasContainer.offsetHeight
 }
@@ -56,12 +61,12 @@ function setCanvasContainerSize(elCanvasContainer) {
     //we want to make the img as big as we can, will still in ratio
     //since it's canvas we don't have features like object-fit
     var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
-    elCanvasContainer.style.height = `${elCanvasContainer.clientWidth * ratio}px`
+    var height = elCanvasContainer.clientWidth * ratio
+    elCanvasContainer.style.height = `${height}px`
+    return height
 }
 
-function setRelativeHeights() {
-    var elCanvasContainer = document.querySelector('.canvas-container')
-    var containerHeight = elCanvasContainer.offsetHeight
+function setRelativeHeights(containerHeight) {
     document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px' 
     document.querySelector('.flex-container').style.height = (containerHeight) + 'px'
 }
@@ -146,19 +151,34 @@ function addCanvasTxt() {
 function onDelete() {
     var elTxt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
     elTxt.classList.add('hidden')
+    elTxt.classList.remove('focus')
     elTxt.innerText = ''
     setTxtSettings(gInFocusTxtId, 'content','')
     //set focus to remaining text
-    if (gInFocusTxtId === '1') setInFocusTxt('2') 
-    else setInFocusTxt('1') 
+    var elTxts = document.querySelectorAll(`.meme-txt`)
+    // elTxts.forEach((txt) => {
+    //     if (!txt.classList.contains('hidden')){
+    //         setInFocusTxt(txt.dataset.id)
+    //         return
+    //     }
+    // })
+    elTxts = Array.from(elTxts)
+    var remainTxt = elTxts.find(txt => !txt.classList.contains('hidden'))
+    if (remainTxt) setInFocusTxt(remainTxt.dataset.id)
+
 }
 
 function onAdd() {
-    if (gInFocusTxtId === '1') var newTxtId ='2' 
-    else var newTxtId ='1' 
-    var elTxt = document.querySelector(`.meme-txt[data-id="${newTxtId}"]`)
-    elTxt.classList.remove('hidden')
-    setInFocusTxt(newTxtId)
+    var elTxts = document.querySelectorAll(`.meme-txt`)
+    elTxts = Array.from(elTxts)
+    var exisTxtEl = elTxts.find(txt => txt.classList.contains('hidden'))
+    if (exisTxtEl) {
+        exisTxtEl.classList.remove('hidden')
+        setInFocusTxt(exisTxtEl.dataset.id)
+    } else {
+        //render new element giv it class - not-defualt
+        //on delete if class is not-defualt ----> remove it entierly and don't hide
+    }
 }
 
 function getTxtWidth(txt, font) {
@@ -236,6 +256,10 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
+function onBackToGallery() {
+    document.querySelector('section.editor').classList.add('hide');
+    document.querySelector('section.gallery').classList.remove('hide');
+}
 
 
 
@@ -247,14 +271,9 @@ function allowDrop(ev) {
 
 
 
-
+//make in focus element always border focus
 //change font size to range
 //add painter
 //more than 2 text
 
 
-
-function onBackToGallery() {
-    document.querySelector('section.editor').classList.add('hide');
-    document.querySelector('section.gallery').classList.remove('hide');
-}

@@ -285,12 +285,7 @@ section.main {
     display: none;
 }
 
-.delete {
-    /* display: block;
-    position: absolute;
-    top:0;
-    right:0; */
-}
+
 
 @media (min-width: 892px) {
     .modal h2 {
@@ -396,7 +391,7 @@ a.download {
     text-align: center;
     width: 90%;
 }
-.meme-txt:focus {
+.meme-txt.focus {
     outline: 4px solid white;
 }
 

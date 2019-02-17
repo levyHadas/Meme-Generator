@@ -39,7 +39,13 @@ function createTxtData(id) {
             color: 'white',
             font: 'impact',
             size: '3rem',
-            align:'center'}
+            align:'center',
+            visible: true}
 }
 
+
+function getVisibaleTxtId() {
+    visibleTxt = gCanvasState.txt.find(txt => txt[visible] === true)
+    return visibleTxt[id]
+}
 
