@@ -4,9 +4,11 @@ var gNumOfTxtLines = 2
 var gInFocusTxtId = '1'
 
 function initEditor(meme) {
+    var elTxts = document.querySelectorAll('.meme-txt')
+    elTxts.forEach(txt => txt.classList.remove('hidden'))
     var imgSrc = meme.src
     var txts = document.querySelectorAll('.meme-txt')
-    txts.forEach((txt) => txt.innerText = '  ')
+    txts.forEach((txt) => txt.innerHTML = '')
     resetCanvasState()
     initCanvas(imgSrc)
     document.querySelector('.meme-txt.txt-1').focus()
@@ -39,6 +41,7 @@ function drawImg() {
 function resizeCanvas(canvas) {
     var elCanvasContainer = document.querySelector('.canvas-container')
     setCanvasContainerSize(elCanvasContainer)
+    setRelativeHeights()
     canvas.width = elCanvasContainer.offsetWidth
     canvas.height = elCanvasContainer.offsetHeight
 }
@@ -53,14 +56,24 @@ function setCanvasContainerSize(elCanvasContainer) {
     elCanvasContainer.style.height = `${elCanvasContainer.clientWidth * ratio}px`
 }
 
+function setRelativeHeights() {
+    var elCanvasContainer = document.querySelector('.canvas-container')
+    var containerHeight = elCanvasContainer.offsetHeight
+    document.querySelector('.meme-txt.txt-2').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
+    //document.querySelector('.txt-2.delete').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
+    
+    document.querySelector('.flex-container').style.height = (containerHeight + 40) + 'px'
+}
+
 
 function renderTxt(txtId, txt = null) {
     if (txtId === '1') var elTextPlace = document.querySelector('.txt-1')
     else var elTextPlace = document.querySelector('.txt-2')
-    if (txt) elTextPlace.innerText = txt;
+    if (txt) elTextPlace.innerHTML = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
     elTextPlace.style.height = getTxtSettings(txtId, 'size');
+    elTextPlace.style.textAlign = getTxtSettings(txtId, 'align');
 }
 
 
@@ -71,7 +84,7 @@ function onEndTyping(elTxtInput) {
 }
 
 function onTextEdit(elTxtInput) {
-    document.querySelector('.editable-txt').style.border = 'none'
+    // document.querySelector('.meme-txt').style.border = 'none'
     var txtId = elTxtInput.dataset.id
     renderTxt(txtId)
 }
@@ -114,31 +127,78 @@ function addCanvasTxt() {
     for (let i = 0; i < gNumOfTxtLines; i++) {
         var txtId = (i + 1) + ''
         var txt = getTxt(txtId)
+        var font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+        gCtx.font = font
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
-        gCtx.font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
         gCtx.shadowColor = '#000000'
         gCtx.shadowBlur = 1;
         gCtx.textBaseline = 'bottom'
-        // var xLocation = elTxts[i].offsetLeft - elCanvas.offsetLeft
-        // var yLocation = elTxts[i].offsetTop -elCanvas.offsetTop + elTxts[i].offsetHeight
         var xLocation = elTxts[i].offsetLeft
-        var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight
+        var yLocation = elTxts[i].offsetTop + elTxts[i].offsetHeight - 55 //padding
+        if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
+        else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
         gCtx.fillText(txt, xLocation, yLocation);
         console.log(gCtx);
-        
+
     }
 }
 
-function onDelete(elTxt) {
-    elTxt.parentElement.style.display= 'none'
-    setTxtSettings(elTxt.dataset.id, 'content')
+function onDelete(txtId) {
+    var elTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
+    elTxt.classList.add('hidden')
+    setTxtSettings(elTxt, 'content')
 }
 
+function getTxtWidth(txt, font) {
+    var canvas = document.querySelector('#help-canvas')
+    var ctx = canvas.getContext('2d')
+    ctx.font = font
+    ctx.fillText(txt, 0, 0);
+    return ctx.measureText(txt).width
+}
+
+function moveTxt(direction) {
+    var txt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
+    switch (direction) {
+        case 'left':
+            var currPos = txt.offsetLeft
+            txt.style.left = currPos - 4 + 'px'
+            break
+        case 'right':
+            var currPos = txt.offsetLeft
+            txt.style.left = currPos + 4 + 'px'
+            break
+        case 'up':
+            var currPos = txt.offsetTop
+            txt.style.top = currPos - 4 + 'px'
+            break
+        case 'down':
+            var currPos = txt.offsetTop
+            txt.style.top = currPos + 4 + 'px'
+            break
+    }
+}
+
+
+
+
+
+
+
+
 //Hadas:
+//line on img instead of input - done.
 // reset input text when new pic - done
-// add more text
 // move text
-//Align left, right, center
+//Align left, right, center - done
+//delete line -done
+//arrange functions in logical order
+
+// move control panel in editor to side in desktop - Done
+// css control panel - Done
+//TODO: arrange functions in logical order
+
+
 
 // Yanai
 // navigation + hide show
@@ -148,29 +208,12 @@ function onDelete(elTxt) {
 
 
 
-// move control panel in editor to side in desktop - css container of control panel
-// css control panel
-
-//delete line
 
 //change font size to range
-//change text lines way of rendering
 // add painter
 
 
-// function dragStart(event) {
-//     event.dataTransfer.setData("Text", event.target.id);
-//   }
-// function allowDrop(event) {
-//     event.preventDefault();
-//   }
 
-//   function drop(event) {
-//     event.preventDefault();
-//     var data = event.dataTransfer.getData("Text");
-//     console.log(data)
-//     // event.target.appendChild(document.getElementById(data));
-//   }
 
 function onBackToGallery() {
     document.querySelector('section.editor').classList.add('hide');

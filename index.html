@@ -19,7 +19,8 @@
             <h2>Select Meme Image</h2>
             <div class="btns-container flex space-between align-center">
                 <div class="filter-bar flex">
-                    <button class="tags-btn btn" title="Tags" onclick="onOpenTagModal()"><i class="fas fa-hashtag"></i></button>
+                    <button class="tags-btn btn" title="Tags" onclick="onOpenTagModal()"><i
+                            class="fas fa-hashtag"></i></button>
                     <div class="search-bar flex align-center">
                         <button class="search-btn btn" title="Search Meme" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
                         <button class="search-return hide btn" onclick="onSearchReturn()">
@@ -27,7 +28,8 @@
                         </button>
                         <div class="search-input-container hidden">
                             <div class="autocomplete"></div>
-                            <input type="text" name="search" oninput="onSearchInput(this.value)" placeholder="Search Memes"/>
+                            <input type="text" name="search" oninput="onSearchInput(this.value)"
+                                placeholder="Search Memes" />
                         </div>
                     </div>
                 </div>
@@ -63,52 +65,76 @@
     </section>
     <section class="editor main hide">
         <div class="top-bar">
-            <h2>Add Text</h2>
             <div class="btns-container flex align-center space-between">
-                <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)"
-                        download="my-canvas.jpg">Download</a></button>
-                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-                    <input name="img" id="imgData" type="hidden" />
-                    <button type="submit" class="btn">Publish</button>
-                </form>
-                <div class="share-container btn flex align-center space-around"></div>
-                <button class="btn btn-to-gallery" onclick="onBackToGallery()">Back To Gallery</button>
+                <button class="btn btn-to-gallery" onclick="onBackToGallery()">⬅ Back</button>
+                <span class="flex">
+                    <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)"
+                            download="my-canvas.jpg">Download</a></button>
+                    <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button type="submit" class="btn">Publish</button>
+                    </form>
+                    <div class="share-container btn flex align-center space-around"></div>
+                </span>
             </div>
         </div>
-        <div class="canvas-container">
-            <div class="meme-txt-container" id="txt-container-1"onclick="setInFocusTxtId(this)" draggable="true">
-                    <p contenteditable="true" class="meme-txt editable-txt txt-1" data-id="1"
-                    oninput="onTextEdit(this)" onblur="onEndTyping(this)"></p><span class="delete txt-1" data-id="1" onclick=onDelete(this)>X</span>
+        <div class="flex-container flex">
+            <div class="canvas-container">
+                <div contenteditable="true" class="meme-txt txt-1" data-id="1" oninput="onTextEdit(this)"
+                    onblur="onEndTyping(this)">
+                </div>
+                <div contenteditable="true" class="meme-txt txt-2" data-id="2" oninput="onTextEdit(this)"
+                onblur="onEndTyping(this)">
+                </div>
+                <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
             </div>
-            <div class="meme-txt-container" onclick="setInFocusTxtId(this)">
-                    <p contenteditable="true" class="meme-txt editable-txt txt-2" data-id="2" draggable="true" 
-                    oninput="onTextEdit(this)" onblur="onEndTyping(this)"></p><span class="delete txt-2" data-id="2" onclick=onDelete(this)>X</span>
+            <div class="control-panel flex column align-center">
+                <button class="delete txt-1" data-id="1" onclick=onDelete(this.dataset.id)>Delete</button>
+                <label class="color-label btn"> Color:
+                    <input type="color" class="txt-display" value="#FFFFFF" data-type="color"
+                        onchange="onDisplayChange(this)">
+                </label>
+                <select class="txt-display btn" data-type="size" onchange="onDisplayChange(this)">
+                    <option selected value="32">32 px</option>
+                    <option value="20">20 px</option>
+                    <option value="24">24 px</option>
+                    <option value="28">28 px</option>
+                    <option value="32" selected>32 px</option>
+                    <option value="36">36 px</option>
+                    <option value="42">42 px</option>
+                    <option value="48">48 px</option>
+                    <option value="54">54 px</option>
+                    <option value="60">60 px</option>
+                </select>
+                <select class="txt-display btn" data-type="align" onchange="onDisplayChange(this)">
+                    <option value="center" selected>center</option>
+                    <option value="right">right</option>
+                    <option value="left">left</option>
+                </select>
+                <select class="txt-display btn" data-type="font" onchange="onDisplayChange(this)">
+                    <option value="Arial">Arial</option>
+                    <option value="Avant Garde">Avant Garde</option>
+                    <option value="Bookman">Bookman</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Garamond">Garamond</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Impact" selected>Impact</option>
+                    <option value="Palatino">Palatino</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+                <div class="movment-btns">
+                    <button class="btn btn-small" data-to="left" onclick="moveTxt(this.dataset.to)">←</button>
+                    <button class="btn btn-small" data-to="right" onclick="moveTxt(this.dataset.to)">→</button>
+                    <button class="btn btn-small" data-to="up" onclick="moveTxt(this.dataset.to)">↑</button>
+                    <button class="btn btn-small" data-to="down" onclick="moveTxt(this.dataset.to)">↓</button>
+                </div>
             </div>
-            <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
         </div>
         <img class="canvas-img" src="" hidden alt="">
-        <div class="control-panel">
-            <input type="color" value="#FFFFFF" class="txt-display" data-type="color" onchange="onDisplayChange(this)">
-            <select class="txt-display" data-type="size" onchange="onDisplayChange(this)">
-                <option selected value="32">32 px</option>
-                <option value="50">50 px</option>
-                <option value="50">50 px</option>
-            </select>
-            <select class="txt-display" data-type="font" onchange="onDisplayChange(this)">
-                <option value="Arial">Arial</option>
-                <option value="Avant Garde">Avant Garde</option>
-                <option value="Bookman">Bookman</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Garamond">Garamond</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Impact" selected>Impact</option>
-                <option value="Palatino">Palatino</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Trebuchet MS">Trebuchet MS</option>
-                <option value="Verdana">Verdana</option>
-            </select>
-        </div>
+        <canvas id="help-canvas"></canvas>
     </section>
     <script src="js/meme-utils.js"></script>
     <script src="js/share-utils.js"></script>

@@ -56,7 +56,7 @@ section.main {
 
 .btns-container {
     position: absolute;
-    top: 50px;
+    top: 40px;
     padding: 10px 20px;
     background-color: rgb(161, 82, 82);
     width: 100%;
@@ -281,6 +281,17 @@ section.main {
     z-index: 2;
 }
 
+.hidden {
+    display: none;
+}
+
+.delete {
+    /* display: block;
+    position: absolute;
+    top:0;
+    right:0; */
+}
+
 @media (min-width: 892px) {
     .modal h2 {
         margin: 40px 80px;
@@ -317,10 +328,9 @@ section.main {
 .canvas-container {
     position: relative;
     width: 90%;
-    /* height: 80vw; */
-    max-width: 500px;
-    max-height: 700px;
-    margin: 0 auto;
+    max-width: 700px;
+    padding-top: 40px; 
+    /* don't remove the padding witout talking! we need this */
 }
 
 
@@ -334,6 +344,7 @@ section.main {
     padding: 0 10px;
     cursor: pointer;
     outline: none;
+    font-size: 1rem
 }
 
 a.download {
@@ -341,6 +352,12 @@ a.download {
     text-decoration: none;
     color: rgb(255, 222, 212);
     padding: 15px 20px;
+}
+
+.color-label {
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 10px; 
 }
 
 
@@ -358,33 +375,50 @@ a.download {
 }
 
 .txt-2 {
-    top: 250px;
-    left: 30px;
+    left: 0;
     /* temp - this should be initial location */
 }
 .txt-1 {
-    top: 20px;
-    left: 30px;
+    top: 80px;
+    left: 0;
     /* temp - this class will not exist  */
 }
 
 
 
-.meme-txt-container {
+.meme-txt {
+    left: 5%; 
+    outline: 1px solid white;
+    font-size: 2rem;
+    text-shadow: 0 0 1px black;
+    line-height: 48px;
+    margin: 0;
     position: absolute;
+    padding: 0;
+    text-align: center;
+    width: 90%;
+}
+
+
+/* .meme-txt-container {
+    position: absolute;
+    width: 100%;
+    top:0;
+
 }
 
 .meme-txt {
+    left: 5%; 
     outline: 1px solid white;
     font-size: 2rem;
-    min-width: 20px;
     text-shadow: 0 0 1px black;
     line-height: 48px;
-    display: inline-block;
     margin: 0;
     position: relative;
     padding: 0;
-}
+    text-align: center;
+    width: 90%;
+} */
 
 .modal.tags >* {
     padding: 20px;
@@ -409,18 +443,61 @@ a.download {
     cursor: pointer;
 }
 
-
-
-/* .meme-txt:focus > .meme-txt-container {
-    outline: none;
-} */
-
-/* .meme-txt-container {
-    position: relative;
-    padding: 0;
-    margin: 0;
-} */
+#help-canvas {
+    display: none;
+}
 
 .tags-item:hover {
     color: brown;
+}
+
+.control-panel {
+    background-color: rgb(122, 62, 62);
+    flex-basis: 20%;
+    justify-content: space-evenly;
+    margin-top: 40px; 
+    padding: 0 20px;
+}
+
+.flex-container {
+    height: 300px;
+    justify-content: center;
+}
+
+.share-container {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-small {
+    height: 30px;
+    width: 30px;
+    font-size: 1rem;
+    padding: 2px;
+}
+
+.btn-download {
+    margin-right: 10px;
+}
+
+@media (max-width: 700px) {
+    .flex-container {
+        display: block;
+    }
+    .control-panel {
+        background-color: rgb(122, 62, 62);
+        margin-top: 40px; 
+        flex-direction: row;
+        padding: 10px; 
+        /* margin: 40px 0; */
+        top: 40px;
+        position: relative
+    }
+    .canvas-container {
+        margin: 0 auto;
+    }
+    .btns-container{
+        padding: 10px 30px;
+    }
+
 }

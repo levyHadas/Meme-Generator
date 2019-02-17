@@ -38,7 +38,8 @@ function createTxtData(id) {
             content: '',
             color: 'white',
             font: 'impact',
-            size: '3rem'}
+            size: '3rem',
+            align:'center'}
 }
 
 
