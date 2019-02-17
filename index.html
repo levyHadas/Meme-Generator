@@ -80,18 +80,27 @@
         </div>
         <div class="flex-container flex">
             <div class="canvas-container">
-                <div contenteditable="true" class="meme-txt txt-1" data-id="1" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
-                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)">
+                <div contenteditable="true" class="meme-txt" data-id="1" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
+                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
                 </div>
-                <div contenteditable="true" class="meme-txt txt-2" data-id="2" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
-                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)">
+                <div contenteditable="true" class="meme-txt" data-id="2" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
+                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
                 </div>
+      
+                <!-- <div contenteditable="true" class="meme-txt" data-id="1" oninput="onTxtEdit(this)"
+                    onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
+                </div>
+                <div contenteditable="true" class="meme-txt" data-id="2" oninput="onTxtEdit(this)"
+                onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
+                </div> -->
+
                 <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
             </div>
             <div class="control-panel flex column align-center">
-                <button class="delete txt-1" data-id="1" onclick=onDelete(this.dataset.id)>Delete</button>
+                <button class="btn add" onclick=onAdd()>Add</button>
+                <button class="btn delete" onclick=onDelete()>Delete</button>
                 <label class="color-label btn"> Color:
-                    <input type="color" class="txt-display" value="#FFFFFF" data-type="color"
+                    <input type="color" class="txt-display color-picker" value="#FFFFFF" data-type="color"
                         onchange="onDisplayChange(this)">
                 </label>
                 <select class="txt-display btn" data-type="size" onchange="onDisplayChange(this)">
@@ -111,7 +120,7 @@
                     <option value="right">right</option>
                     <option value="left">left</option>
                 </select>
-                <select class="txt-display btn" data-type="font" onchange="onDisplayChange(this)">
+                <select class="txt-display btn font-picker" data-type="font" onchange="onDisplayChange(this)">
                     <option value="Arial">Arial</option>
                     <option value="Avant Garde">Avant Garde</option>
                     <option value="Bookman">Bookman</option>

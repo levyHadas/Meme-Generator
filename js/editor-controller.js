@@ -1,22 +1,24 @@
 'use strict';
 var gCtx
 var gNumOfTxtLines = 2
-var gInFocusTxtId = '1'
 var gDragState = {isDragging: false, clickPos: {x: 0, y: 0}, dragStartPos: {left: 0, top: 0}}
+var gInFocusTxtId
 
 function initEditor(meme) {
     var elTxts = document.querySelectorAll('.meme-txt')
     elTxts.forEach(txt => txt.classList.remove('hidden'))
     var imgSrc = meme.src
     var txts = document.querySelectorAll('.meme-txt')
-    txts.forEach((txt) => txt.innerHTML = '')
+    txts.forEach((txt) => txt.innerText = '')
     resetCanvasState()
     initCanvas(imgSrc)
-    document.querySelector('.meme-txt.txt-1').focus()
+    setInFocusTxt('1')
 }
 
-function setInFocusTxtId(txtContainer) {
-    gInFocusTxtId = txtContainer.firstElementChild.dataset.id
+function setInFocusTxt(txtId) {
+    var eTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
+    eTxt.focus()
+    gInFocusTxtId = txtId
 }
 
 function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
@@ -60,17 +62,15 @@ function setCanvasContainerSize(elCanvasContainer) {
 function setRelativeHeights() {
     var elCanvasContainer = document.querySelector('.canvas-container')
     var containerHeight = elCanvasContainer.offsetHeight
-    document.querySelector('.meme-txt.txt-2').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
-    //document.querySelector('.txt-2.delete').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
-    
-    document.querySelector('.flex-container').style.height = (containerHeight + 40) + 'px'
+    document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px' 
+    document.querySelector('.flex-container').style.height = (containerHeight) + 'px'
 }
 
 
 function renderTxt(txtId, txt = null) {
-    if (txtId === '1') var elTextPlace = document.querySelector('.txt-1')
-    else var elTextPlace = document.querySelector('.txt-2')
-    if (txt) elTextPlace.innerHTML = txt;
+    if (txtId === '1') var elTextPlace = document.querySelector('[data-id="1"]')
+    else var elTextPlace = document.querySelector('[data-id="2"]')
+    if (txt) elTextPlace.innerText = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
     elTextPlace.style.height = getTxtSettings(txtId, 'size');
@@ -84,8 +84,7 @@ function onEndTyping(elTxtInput) {
     setTxtSettings(txtId, 'content', txt)
 }
 
-function onTextEdit(elTxtInput) {
-    // document.querySelector('.meme-txt').style.border = 'none'
+function onTxtEdit(elTxtInput) {
     var txtId = elTxtInput.dataset.id
     renderTxt(txtId)
 }
@@ -144,10 +143,22 @@ function addCanvasTxt() {
     }
 }
 
-function onDelete(txtId) {
-    var elTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
+function onDelete() {
+    var elTxt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
     elTxt.classList.add('hidden')
-    setTxtSettings(elTxt, 'content')
+    elTxt.innerText = ''
+    setTxtSettings(gInFocusTxtId, 'content','')
+    //set focus to remaining text
+    if (gInFocusTxtId === '1') setInFocusTxt('2') 
+    else setInFocusTxt('1') 
+}
+
+function onAdd() {
+    if (gInFocusTxtId === '1') var newTxtId ='2' 
+    else var newTxtId ='1' 
+    var elTxt = document.querySelector(`.meme-txt[data-id="${newTxtId}"]`)
+    elTxt.classList.remove('hidden')
+    setInFocusTxt(newTxtId)
 }
 
 function getTxtWidth(txt, font) {
@@ -218,32 +229,19 @@ function allowDrop(ev) {
 
 
 
-//Hadas:
-//line on img instead of input - done.
-// reset input text when new pic - done
-// move text
-//Align left, right, center - done
-//delete line -done
-//arrange functions in logical order
 
-// move control panel in editor to side in desktop - Done
-// css control panel - Done
+
 //TODO: arrange functions in logical order
 
 
 
-// Yanai
-// navigation + hide show
-// add share
-// shadow 
-// render fonts to select from js
 
 
 
-
+//Move Text with arrows
 //change font size to range
-// add painter
-
+//add painter
+//more than 2 text
 
 
 
