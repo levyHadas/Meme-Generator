@@ -15,26 +15,24 @@
         <h1 class="main-title">Meme Generator</h1>
     </header>
     <section class="gallery main flex column">
-        <div class="top-bar">
-            <h2>Select Meme Image</h2>
-            <div class="btns-container flex space-between align-center">
-                <div class="filter-bar flex">
-                    <button class="tags-btn btn" title="Tags" onclick="onOpenTagModal()"><i
-                            class="fas fa-hashtag"></i></button>
-                    <div class="search-bar flex align-center">
-                        <button class="search-btn btn" title="Search Meme" onclick="onDisplaySearch()"><i class="fas fa-search"></i></button>
-                        <button class="search-return hide btn" onclick="onSearchReturn()">
-                                ←
-                        </button>
-                        <div class="search-input-container hidden">
-                            <div class="autocomplete"></div>
-                            <input type="text" name="search" oninput="onSearchInput(this.value)"
-                                placeholder="Search Memes" />
-                        </div>
+        <div class="top-bar btns-container flex space-between align-center">
+            <div class="filter-bar flex">
+                <button class="tags-btn btn" title="Tags" onclick="onOpenTagModal()"><i
+                        class="fas fa-hashtag"></i></button>
+                <div class="search-bar flex align-center">
+                    <button class="search-btn btn" title="Search Meme" onclick="onDisplaySearch()"><i
+                            class="fas fa-search"></i></button>
+                    <button class="search-return hide btn" onclick="onSearchReturn()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="search-input-container hidden">
+                        <div class="autocomplete"></div>
+                        <input type="text" name="search" oninput="onSearchInput(this.value)"
+                            placeholder="Search Memes" />
                     </div>
                 </div>
-                <button class="add-meme btn" title="Add Meme" onclick="onAddMeme()"><i class="fas fa-plus"></i></button>
             </div>
+            <button class="add-meme btn" title="Add Meme" onclick="onAddMeme()"><i class="fas fa-plus"></i></button>
         </div>
         <div class="modal add-meme hide flex column align-center">
             <h2>Add New Meme</h2>
@@ -64,35 +62,28 @@
         </div>
     </section>
     <section class="editor main hide">
-        <div class="top-bar">
-            <div class="btns-container flex align-center space-between">
-                <button class="btn btn-to-gallery" onclick="onBackToGallery()">⬅ Back</button>
-                <span class="flex">
-                    <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)"
-                            download="my-canvas.jpg">Download</a></button>
-                    <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-                        <input name="img" id="imgData" type="hidden" />
-                        <button type="submit" class="btn">Publish</button>
-                    </form>
-                    <div class="share-container btn flex align-center space-around"></div>
-                </span>
-            </div>
+        <div class="top-bar btns-container flex align-center space-between">
+            <button class="btn btn-to-gallery" onclick="onBackToGallery()"><i class="fas fa-arrow-left"></i></button>
+            <span class="flex">
+                <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)"
+                        download="my-canvas.jpg">Download</a></button>
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden" />
+                    <button type="submit" class="btn publish-btn">Publish</button>
+                </form>
+                <div class="share-container btn flex align-center hide space-around"></div>
+            </span>
         </div>
         <div class="flex-container flex">
             <div class="canvas-container">
-                <div contenteditable="true" class="meme-txt" data-id="1" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
-                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
-                </div>
-                <div contenteditable="true" class="meme-txt" data-id="2" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
-                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
-                </div>
-      
-                <!-- <div contenteditable="true" class="meme-txt" data-id="1" oninput="onTxtEdit(this)"
-                    onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
+                <div contenteditable="true" class="meme-txt" data-id="1" oninput="onTxtEdit(this)"
+                    onmousedown="onStartDrag(event, this)" onmouseup="onStopDrag()" onmousemove="onDrag(event, this)"
+                    onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
                 </div>
                 <div contenteditable="true" class="meme-txt" data-id="2" oninput="onTxtEdit(this)"
-                onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
-                </div> -->
+                    onmousedown="onStartDrag(event, this)" onmouseup="onStopDrag()" onmousemove="onDrag(event, this)"
+                    onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)">
+                </div>
 
                 <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
             </div>

@@ -28,7 +28,7 @@ p {
 
 header {
     height: 130px;
-    background-color: #30303070;
+    background-image: linear-gradient(to bottom, #505050, #202020) ;
 }
 
 .main-title {
@@ -36,13 +36,13 @@ header {
 }
 
 section.main {
-    background-color: rgba(122, 62, 62, 0.26);
+    background-color: #3030304f;
     padding-bottom: 20px;
     flex: 1;
 }
 
 .top-bar {
-    height: 118px;
+    height: 68px;
     position: relative;
     background-color: rgb(122, 62, 62);
     align-items: flex-end;
@@ -55,7 +55,6 @@ section.main {
 }
 
 .btns-container {
-    position: absolute;
     /* top: 40px; */
     padding: 10px 20px;
     background-color: rgb(161, 82, 82);
@@ -65,7 +64,6 @@ section.main {
 @media (min-width: 892px) {
     .top-bar {
         padding: 10px 20px;
-        height: 68px;
         align-items: center;
     }
 
@@ -75,12 +73,6 @@ section.main {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%); 
-    }
-
-    .btns-container {
-        position: static;
-        padding: 0;
-        background-color: unset;
     }
 }
 
@@ -327,11 +319,9 @@ section.main {
 
 .canvas-container {
     position: relative;
-    width: 90%;
+    width: 100%;
     max-width: 700px;
 }
-
-
 
 .btn {
     border: none;
@@ -345,11 +335,15 @@ section.main {
     font-size: 1rem
 }
 
+.btn-to-gallery {
+    width: 48px;
+}
+
 a.download {
     font-size: inherit;
     text-decoration: none;
     color: rgb(255, 222, 212);
-    padding: 15px 20px;
+    padding: 15px 5px;
 }
 
 .color-label {
@@ -358,11 +352,14 @@ a.download {
     padding-top: 5px; 
 }
 
-
+.publish-btn {
+    width: 80px;
+}
 
 .share-container {
     background-color: #4267b2;
     visibility: hidden;
+    width: 100px;
 }
 
 .share-container>* {
@@ -444,11 +441,7 @@ a.download {
 .flex-container {
     height: 300px;
     justify-content: center;
-}
-
-.share-container {
-    margin: 0;
-    padding: 0;
+    flex-direction: column;
 }
 
 .btn-small {
@@ -466,22 +459,14 @@ a.download {
     width: 100px; 
 }
 
-@media (max-width: 700px) {
+@media (min-width: 692px) {
     .flex-container {
-        display: block;
+        flex-direction: row;
     }
     .control-panel {
-        background-color: rgb(122, 62, 62);
-        flex-direction: row;
+        flex-direction: column;
         padding: 10px; 
         /* top: 40px; */
         position: relative
     }
-    .canvas-container {
-        margin: 0 auto;
-    }
-    .btns-container{
-        padding: 10px 30px;
-    }
-
 }

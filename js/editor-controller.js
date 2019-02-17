@@ -62,7 +62,7 @@ function setCanvasContainerSize(elCanvasContainer) {
 function setRelativeHeights() {
     var elCanvasContainer = document.querySelector('.canvas-container')
     var containerHeight = elCanvasContainer.offsetHeight
-    document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px' 
+    document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px'
     document.querySelector('.flex-container').style.height = (containerHeight) + 'px'
 }
 
@@ -192,8 +192,6 @@ function moveTxt(direction) {
 }
 
 function onStartDrag(ev, el) {
-    console.log('start drag');
-    // debugger;
     gDragState.isDragging = true;
     gDragState.dragStartPos.left = el.offsetLeft;
     gDragState.dragStartPos.top = el.offsetTop;
@@ -202,23 +200,15 @@ function onStartDrag(ev, el) {
 }
 
 function onDrag(ev, el) {
-    // console.log('drag');
-    // debugger;
     if (gDragState.isDragging) {
         var xChange = ev.clientX - gDragState.clickPos.x;
         var yChange = ev.clientY - gDragState.clickPos.y;
-        // console.log((el.offsetTop - yChange) + '');
-        
         el.style.top = (gDragState.dragStartPos.top + yChange) + 'px';
         el.style.left = (gDragState.dragStartPos.left + xChange) + 'px';
-        
-        // console.log(xChange);
     }
 }
 
-function onStopDrag(el) {
-    console.log('stop drag');
-
+function onStopDrag() {
     gDragState.isDragging = false;
 }
 

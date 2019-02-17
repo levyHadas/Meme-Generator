@@ -14,6 +14,8 @@ function uploadImg(elForm, ev) {
            Share <i class="fab fa-facebook"></i>   
         </a>`
         document.querySelector('.share-container').style.visibility = 'visible';
+        document.querySelector('.share-container').classList.remove('hide');
+        document.querySelector('.publish-btn').style.display = 'none';
     }
 
     doUploadImg(elForm, onSuccess);
