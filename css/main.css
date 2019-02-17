@@ -47,6 +47,12 @@ p {
     margin: 0;
 }
 
+hr {
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
 header {
     height: 130px;
     background-image: linear-gradient(to bottom, #505050, #202020);
@@ -58,15 +64,17 @@ header {
         display: flex;
     }
     .meme-txt {
-        outline: 1px dashed rgba(255, 222, 212, 0.627);
+        outline: 0.5px dashed rgba(255, 222, 212, 0.627);
     }
     .meme-txt.focus {
-        outline: 1px solid rgba(255, 222, 212, 0.727);
+        outline: 0.5px solid rgba(255, 222, 212, 0.727);
     }
 }
 
 .main-title {
-    color: aliceblue;
+    color: white;
+    font-family: cursive;
+    font-size: 3rem; 
 }
 
 section.main {
@@ -78,7 +86,7 @@ section.main {
 .top-bar {
     height: 68px;
     position: relative;
-    background-color: rgb(122, 62, 62);
+    background-color: rgba(33, 47, 54);
     align-items: flex-end;
     padding-top: 10px;
 }
@@ -91,7 +99,7 @@ section.main {
 .btns-container {
     /* top: 40px; */
     padding: 10px 20px;
-    background-color: rgb(161, 82, 82);
+    background-color: rgba(33, 47, 54, 0.95);
     width: 100%;
 }
 
@@ -133,9 +141,16 @@ section.main {
     font-size: 130%;
 }
 
-.search-input-container {
+.search-input-container input {
     position: relative;
     width: 160px;
+    height: 48px;
+    background-color: #18252b;
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+
 }
 
 .search-input-container.hidden {
@@ -150,15 +165,21 @@ section.main {
 .search-bar input {
     border: none;
     width: 160px;
+    outline: 2px solid rgba(255, 255, 255, 0.14);
 }
 
 .autocomplete {
-    background-color: white;
+    background-color: rgba(24, 37, 42, 0.83);
+    color: white;
     width: 160px;
     position: absolute;
-    top: 21px;
+    top: 55px;
     overflow-x: hidden;
     z-index: 1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.autocomplete-item {
+    padding: 10px 10px;
 }
 
 .autocomplete-item:hover {
@@ -222,7 +243,7 @@ section.main {
     width: 100%;
     height: 135%;
     transform: translate(-1px, -1px);
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.35);
 }
 
 .shadow:hover {
@@ -236,8 +257,8 @@ section.main {
     clip-path: polygon(50% 0, 0 25%, 0 75%, 50% 100%, 100% 75%, 100% 25%);
     background-position: center;
     background-size: cover;
-    width: 98%;
-    height: 98%;
+    width: 97%;
+    height: 97%;
     cursor: pointer;
     transform: translate(1px, 1px);
 }
@@ -364,14 +385,19 @@ section.main {
 
 .btn {
     border: none;
-    background-color: rgb(78, 34, 34);
+    background-color: rgb(22, 34, 39, 0.77);
     border-radius: 5px;
-    color: rgb(255, 222, 212);
+    color: white;
     height: 48px;
     padding: 0 10px;
     cursor: pointer;
     outline: none;
-    font-size: 1rem
+    font-size: 1rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.14)
+}
+
+.control-panel .btn {
+    background-color: rgba(46, 46, 46, 0.62);
 }
 
 .btn-to-gallery {
@@ -381,7 +407,7 @@ section.main {
 a.download {
     font-size: inherit;
     text-decoration: none;
-    color: rgb(255, 222, 212);
+    color: white;
     padding: 15px 5px;
 }
 
@@ -418,9 +444,9 @@ a.download {
 
 .meme-txt {
     left: 4%; 
-    outline: 3px dashed rgba(255, 222, 212, 0.627);
+    outline: 3px dashed rgba(255, 255, 255, 0.627);
     font-size: 2rem;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1.2px black;
     line-height: 48px;
     margin: 0;
     position: absolute;
@@ -429,7 +455,7 @@ a.download {
     width: 90%;
 }
 .meme-txt.focus {
-    outline: 3px solid rgba(255, 222, 212, 0.727);
+    outline: 3px solid rgba(255, 255, 255, 0.727);
 }
 
 .custom-box {
@@ -497,8 +523,7 @@ a.download {
 }
 
 .control-panel {
-    background-color: rgb(122, 62, 62);
-    /* flex-basis: 20%; */
+    background-color: rgb(38, 38, 38, 0.9);
     justify-content: space-evenly;
     padding: 0 20px;
     min-width: 200px;
@@ -515,7 +540,6 @@ a.download {
 }
 
 .flex-container {
-    /* height: 300px; */
     justify-content: center;
     flex-direction: column;
 }
@@ -534,6 +558,10 @@ a.download {
 .font-picker {
     width: 100px; 
 }
+/* TODO: place holder */
+/* .meme-txt:empty:not(:focus):before{
+    content:attr(data-text)
+} */
 
 @media (min-width: 892px) {
     .flex-container {
