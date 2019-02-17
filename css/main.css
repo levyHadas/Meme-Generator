@@ -36,6 +36,12 @@ header {
     header {
         display: flex;
     }
+    .meme-txt {
+        outline: 1px dashed rgba(255, 222, 212, 0.627);
+    }
+    .meme-txt.focus {
+        outline: 1px solid rgba(255, 222, 212, 0.727);
+    }
 }
 
 .main-title {
@@ -389,7 +395,7 @@ a.download {
 
 .meme-txt {
     left: 4%; 
-    outline: 3px dashed rgba(255, 255, 255, 0.627);
+    outline: 3px dashed rgba(255, 222, 212, 0.627);
     font-size: 2rem;
     -webkit-text-stroke: 1px black;
     line-height: 48px;
@@ -400,7 +406,7 @@ a.download {
     width: 90%;
 }
 .meme-txt.focus {
-    outline: 3px solid rgba(255, 255, 255, 0.727);
+    outline: 3px solid rgba(255, 222, 212, 0.727);
 }
 
 .custom-box {
