@@ -87,7 +87,6 @@ section.main {
 .top-bar {
     height: 68px;
     position: relative;
-    background-color: rgba(33, 47, 54);
     align-items: flex-end;
     padding-top: 10px;
 }
@@ -398,9 +397,9 @@ section.main {
     border: 1.5px solid rgba(255, 255, 255, 0.14)
 }
 
-.control-panel .btn {
+/* .control-panel .btn {
     background-color: rgba(46, 46, 46, 0.62);
-}
+} */
 
 .btn-to-gallery {
     width: 48px;
@@ -469,6 +468,8 @@ a.download {
     width: 120px;
     height: 120px;
     position: relative;
+    /* flex-basis: 50%; */
+    flex-grow: 0.3;
 }
 
 .movment-btns>:nth-child(1) {
@@ -525,8 +526,9 @@ a.download {
 }
 
 .control-panel {
-    background-color: rgb(38, 38, 38, 0.9);
-    padding: 10px 20px;
+    background-color: rgba(33, 47, 54, 1);
+    background-color: rgba(33, 47, 54, 0.95);
+    padding: 10px 10px;
     min-width: 200px;
 }
 
@@ -576,6 +578,15 @@ a.download {
     .setting-container {
         flex-direction:  column;
     }
+    .control-panel .btn {
+        background-color: rgba(46, 46, 46, 0.62);
+    }
+    .control-panel {
+        background-color: rgb(38, 38, 38, 0.9);
+        padding: 10px 10px;
+        min-width: 200px;
+    }
+
 }
 
 .wrap {
@@ -593,3 +604,4 @@ a.download {
 .font-picker, .txt-display {
     width: 58px;
 }
+
