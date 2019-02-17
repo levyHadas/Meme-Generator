@@ -78,19 +78,28 @@
         </div>
         <div class="flex-container flex">
             <div class="canvas-container">
-                <div class="meme-txt-container" id="txt-container-1" onclick="setInFocusTxtId(this)" draggable="true">
-                    <p contenteditable="true" class="meme-txt editable-txt txt-1" data-id="1" oninput="onTextEdit(this)"
+                <!-- <div class="meme-txt-container" id="txt-container-1" onclick="setInFocusTxtId(this)" draggable="true">
+                    <p contenteditable="true" class="meme-txt txt-1" data-id="1" oninput="onTextEdit(this)"
                         onblur="onEndTyping(this)"></p><span class="delete txt-1" data-id="1"
                         onclick=onDelete(this)>X</span>
+                </div> -->
+                <div contenteditable="true" class="meme-txt txt-1" data-id="1" oninput="onTextEdit(this)"
+                    onblur="onEndTyping(this)">
                 </div>
+                <div contenteditable="true" class="meme-txt txt-2" data-id="2" oninput="onTextEdit(this)"
+                onblur="onEndTyping(this)">
+                    <!-- <button class="delete txt-2" data-id="2" onclick=onDelete(this)>X</button> -->
+                </div>
+<!-- 
                 <div class="meme-txt-container" onclick="setInFocusTxtId(this)">
-                    <p contenteditable="true" class="meme-txt editable-txt txt-2" data-id="2" draggable="true"
+                    <p contenteditable="true" class="meme-txt txt-2" data-id="2" draggable="true"
                         oninput="onTextEdit(this)" onblur="onEndTyping(this)"></p><span class="delete txt-2" data-id="2"
                         onclick=onDelete(this)>X</span>
-                </div>
+                </div> -->
                 <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
             </div>
             <div class="control-panel flex column align-center">
+                <button class="delete txt-1" data-id="1" onclick=onDelete(this.dataset.id)>Delete</button>
                 <label class="color-label btn"> Color:
                     <input type="color" class="txt-display" value="#FFFFFF" data-type="color"
                         onchange="onDisplayChange(this)">

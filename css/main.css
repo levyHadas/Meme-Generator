@@ -267,6 +267,13 @@ section.main {
     display: none;
 }
 
+.delete {
+    /* display: block;
+    position: absolute;
+    top:0;
+    right:0; */
+}
+
 @media (min-width: 892px) {
     .modal h2 {
         margin: 40px 80px;
@@ -361,7 +368,21 @@ a.download {
 
 
 
-.meme-txt-container {
+.meme-txt {
+    left: 5%; 
+    outline: 1px solid white;
+    font-size: 2rem;
+    text-shadow: 0 0 1px black;
+    line-height: 48px;
+    margin: 0;
+    position: absolute;
+    padding: 0;
+    text-align: center;
+    width: 90%;
+}
+
+
+/* .meme-txt-container {
     position: absolute;
     width: 100%;
     top:0;
@@ -372,15 +393,14 @@ a.download {
     left: 5%; 
     outline: 1px solid white;
     font-size: 2rem;
-    width: 90%;
     text-shadow: 0 0 1px black;
     line-height: 48px;
-    display: inline-block;
     margin: 0;
     position: relative;
     padding: 0;
     text-align: center;
-}
+    width: 90%;
+} */
 
 .modal.tags >* {
     padding: 20px;

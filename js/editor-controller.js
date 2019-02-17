@@ -5,10 +5,10 @@ var gInFocusTxtId = '1'
 
 function initEditor(meme) {
     var elTxts = document.querySelectorAll('.meme-txt')
-    elTxts.forEach(txt => txt.parentElement.classList.remove('hidden'))
+    elTxts.forEach(txt => txt.classList.remove('hidden'))
     var imgSrc = meme.src
     var txts = document.querySelectorAll('.meme-txt')
-    txts.forEach((txt) => txt.innerText = '  ')
+    txts.forEach((txt) => txt.innerHTML = '')
     resetCanvasState()
     initCanvas(imgSrc)
     document.querySelector('.meme-txt.txt-1').focus()
@@ -60,7 +60,8 @@ function setRelativeHeights() {
     var elCanvasContainer = document.querySelector('.canvas-container')
     var containerHeight = elCanvasContainer.offsetHeight
     document.querySelector('.meme-txt.txt-2').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
-    document.querySelector('.txt-2.delete').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
+    //document.querySelector('.txt-2.delete').style.top = (0.85 * containerHeight) + 'px' //need to put this line in a better place
+    
     document.querySelector('.flex-container').style.height = (containerHeight + 40) + 'px'
 }
 
@@ -68,7 +69,7 @@ function setRelativeHeights() {
 function renderTxt(txtId, txt = null) {
     if (txtId === '1') var elTextPlace = document.querySelector('.txt-1')
     else var elTextPlace = document.querySelector('.txt-2')
-    if (txt) elTextPlace.innerText = txt;
+    if (txt) elTextPlace.innerHTML = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
     elTextPlace.style.height = getTxtSettings(txtId, 'size');
@@ -83,7 +84,7 @@ function onEndTyping(elTxtInput) {
 }
 
 function onTextEdit(elTxtInput) {
-    document.querySelector('.editable-txt').style.border = 'none'
+    // document.querySelector('.meme-txt').style.border = 'none'
     var txtId = elTxtInput.dataset.id
     renderTxt(txtId)
 }
@@ -142,10 +143,10 @@ function addCanvasTxt() {
     }
 }
 
-function onDelete(elTxt) {
-    
-    elTxt.parentElement.classList.add('hidden')
-    setTxtSettings(elTxt.dataset.id, 'content')
+function onDelete(txtId) {
+    var elTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
+    elTxt.classList.add('hidden')
+    setTxtSettings(elTxt, 'content')
 }
 
 function getTxtWidth(txt, font) {
@@ -157,28 +158,23 @@ function getTxtWidth(txt, font) {
 }
 
 function moveTxt(direction) {
-    var txt = document.querySelector(`p[data-id="${gInFocusTxtId}"]`)
-    var deleteBtn = document.querySelector(`.delete[data-id="${gInFocusTxtId}"]`)
+    var txt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
     switch (direction) {
         case 'left':
             var currPos = txt.offsetLeft
             txt.style.left = currPos - 4 + 'px'
-            deleteBtn.style.left = currPos - 4 + 'px'
             break
         case 'right':
             var currPos = txt.offsetLeft
             txt.style.left = currPos + 4 + 'px'
-            deleteBtn.style.left = currPos -+4 + 'px'
             break
         case 'up':
             var currPos = txt.offsetTop
             txt.style.top = currPos - 4 + 'px'
-            deleteBtn.style.top = currPos - 4 + 'px'
             break
         case 'down':
             var currPos = txt.offsetTop
             txt.style.top = currPos + 4 + 'px'
-            deleteBtn.style.top = currPos + 4 + 'px'
             break
     }
 }
