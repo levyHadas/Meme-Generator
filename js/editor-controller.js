@@ -169,6 +169,23 @@ function getTxtWidth(txt, font) {
     return ctx.measureText(txt).width
 }
 
+function OnKeyMove(ev){
+    switch (ev.code) {
+        case 'ArrowLeft':
+            moveTxt('left')
+            break
+        case 'ArrowRight':
+            moveTxt('right')
+            break
+        case 'ArrowUp':
+            moveTxt('up')
+            break
+        case 'ArrowDown':
+            moveTxt('down')
+            break
+    }
+}
+
 function moveTxt(direction) {
     var txt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
     switch (direction) {
@@ -193,7 +210,6 @@ function moveTxt(direction) {
 
 function onStartDrag(ev, el) {
     console.log('start drag');
-    // debugger;
     gDragState.isDragging = true;
     gDragState.dragStartPos.left = el.offsetLeft;
     gDragState.dragStartPos.top = el.offsetTop;
@@ -202,17 +218,11 @@ function onStartDrag(ev, el) {
 }
 
 function onDrag(ev, el) {
-    // console.log('drag');
-    // debugger;
     if (gDragState.isDragging) {
         var xChange = ev.clientX - gDragState.clickPos.x;
-        var yChange = ev.clientY - gDragState.clickPos.y;
-        // console.log((el.offsetTop - yChange) + '');
-        
+        var yChange = ev.clientY - gDragState.clickPos.y;        
         el.style.top = (gDragState.dragStartPos.top + yChange) + 'px';
         el.style.left = (gDragState.dragStartPos.left + xChange) + 'px';
-        
-        // console.log(xChange);
     }
 }
 
@@ -238,7 +248,6 @@ function allowDrop(ev) {
 
 
 
-//Move Text with arrows
 //change font size to range
 //add painter
 //more than 2 text
