@@ -1,23 +1,25 @@
+//Comment regaring text lines - Since support for more than 2 text boxes was added at a later time,
+//there is a different behaviour for the 2 initial boxes and the extra ones
+//Ideally - all should be rendered at init and at add and all should be removed completely when deleted
+
 'use strict';
 var gCtx
 var gNumOfTxtLines = 2
 var gDragState = { isDragging: false, clickPos: { x: 0, y: 0 }, dragStartPos: { left: 0, top: 0 } }
 var gInFocusTxtId
 
+
+function onBackToGallery() {
+    document.querySelector('section.editor').classList.add('hide');
+    document.querySelector('section.gallery').classList.remove('hide');
+}
+
 function initEditor(meme) {
     var imgSrc = meme.src
-    resetCanvasState()
+    resetCanvasModel() //reset modal
     resetTxtBoxs()
+    setInFocusTxt('1')  
     initCanvas(imgSrc)
-    setInFocusTxt('1')
-    var div1 = document.querySelector('[data-id="1"]');
-    var div2 = document.querySelector('[data-id="2"]');
-    div1.addEventListener("touchstart", function () { onStartDrag(event, div1) }, false);
-    div1.addEventListener("touchend", function () { onStopDrag() }, false);
-    div1.addEventListener("touchmove", function () { onDrag(event, div1) }, false);
-    div2.addEventListener("touchstart", function () { onStartDrag(event, div2) }, false);
-    div2.addEventListener("touchend", function () { onStopDrag() }, false);
-    div2.addEventListener("touchmove", function () { onDrag(event, div2) }, false);
 }
 
 function resetTxtBoxs() {
@@ -27,16 +29,22 @@ function resetTxtBoxs() {
         txt.innerText = ''
         txt.style.top = ''
         txt.style.left = ''
+        setDragEvents(txt)
     })
 
-    var elAddedTxtBoxs = document.querySelectorAll('.custom-box')
+    var elAddedTxtBoxs = document.querySelectorAll('.extra-box')
     elAddedTxtBoxs.forEach(box => box.outerHTML = '')
+}
+
+function setDragEvents(txt) {
+    txt.addEventListener("touchstart", function () { onStartDrag(event, txt) }, false);
+    txt.addEventListener("touchend", function () { onStopDrag() }, false);
+    txt.addEventListener("touchmove", function () { onDrag(event, txt) }, false);
 }
 
 function setInFocusTxt(txtId) {
     var elTxts = document.querySelectorAll(`.meme-txt`)
     elTxts.forEach((txt) => txt.classList.remove('focus'))
-
     var elTxt = document.querySelector(`.meme-txt[data-id="${txtId}"]`)
     elTxt.classList.add('focus')
     elTxt.focus()
@@ -53,7 +61,6 @@ function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
     gCtx.scale(1, 1);
 }
 
-
 function drawImg() {
     var imgSrc = getImgSrc()
     var img = new Image()
@@ -69,14 +76,13 @@ function resizeCanvas(canvas) {
     var containerHeight = setCanvasContainerSize(elCanvasContainer)
     canvas.width = elCanvasContainer.offsetWidth;
     canvas.height = containerHeight;
-    setRelativeHeights(containerHeight)
 }
 
 function setCanvasContainerSize(elCanvasContainer) {
     var imgSrc = getImgSrc()
     var imgObj = new Image();
     imgObj.src = imgSrc;
-    //we want to make the img as big as we can, will still in ratio
+    //we want to make the img as big as we can, while still in ratio
     //since it's canvas we don't have features like object-fit
     var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
     var height = elCanvasContainer.clientWidth * ratio
@@ -84,11 +90,11 @@ function setCanvasContainerSize(elCanvasContainer) {
     return height
 }
 
-function setRelativeHeights(containerHeight) {
-    // document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px'
-    // document.querySelector('.flex-container').style.height = (containerHeight) + 'px'
-}
 
+function onTxtEdit(elTxtInput) {
+    var txtId = elTxtInput.dataset.id
+    renderTxt(txtId)
+}
 
 function renderTxt(txtId, txt = null) {
     var elTextPlace = document.querySelector(`[data-id="${txtId}"]`)
@@ -99,16 +105,10 @@ function renderTxt(txtId, txt = null) {
     elTextPlace.style.textAlign = getTxtSettings(txtId, 'align');
 }
 
-
 function onEndTyping(elTxtInput) {
     var txtId = elTxtInput.dataset.id
     var txt = elTxtInput.innerText
     setTxtSettings(txtId, 'content', txt)
-}
-
-function onTxtEdit(elTxtInput) {
-    var txtId = elTxtInput.dataset.id
-    renderTxt(txtId)
 }
 
 function onDisplayChange(elTxtDisplay) {
@@ -123,55 +123,15 @@ function submitChange(txtId) {
     renderTxt(txtId, txt)
 }
 
-function getTxt(txtId) {
-    return getTxtSettings(txtId, 'content')
-}
-
-function downloadImg(elLink) {
-    addCanvasTxt()
-    var canvas = document.querySelector('#meme-canvas')
-    var imgContent = canvas.toDataURL('image/png');
-    elLink.href = imgContent
-    gCtx.clearRect(0, 0, canvas.width, canvas.height)
-    drawImg()
-}
-
-function resizeCanvasForDownload(canvas) {
-    var imgSrc = getImgSrc()
-    var imgObj = new Image();
-    imgObj.src = imgSrc;
-    canvas.width = imgObj.width
-    canvas.height = imgObj.height
-}
-
-function addCanvasTxt() {
-    var elTxts = document.querySelectorAll('.meme-txt')
-    for (let i = 0; i < elTxts.length; i++) {
-        var txtId = (i + 1) + ''
-        var txt = getTxt(txtId)
-        var font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
-        gCtx.font = font
-        gCtx.fillStyle = getTxtSettings(txtId, 'color')
-        gCtx.strokeStyle = 'black';
-        gCtx.lineWidth = 2
-        // gCtx.shadowColor = '#000000'
-        // gCtx.shadowBlur = 2;
-        gCtx.textBaseline = 'bottom'
-        var xLocation = elTxts[i].offsetLeft
-        var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight
-        if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
-        else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
-        gCtx.strokeText(txt, xLocation, yLocation)
-        gCtx.fillText(txt, xLocation, yLocation);
-    }
-}
-
+//Since support for more than 2 text boxes was added at a later time,
+//there is a different behaviour for the 2 initial boxes and the extra ones
+//Ideally - all should be rendered at init and at add and all should be removed completely when deleted
 function onDelete(inFocusId = gInFocusTxtId) {
     var elTxt = document.querySelector(`.meme-txt[data-id="${inFocusId}"]`)
-    if (inFocusId > 2) { //if this is a custom txt box, remove it
+    if (inFocusId > 2) { //if this is an extra txt box, remove the element
         elTxt.outerHTML = ''
         deleteTxt(inFocusId)
-    } else {
+    } else { //if it's initial txt box, just hide it
         elTxt.classList.add('hidden')
         elTxt.classList.remove('focus')
         elTxt.innerText = ''
@@ -184,23 +144,22 @@ function onDelete(inFocusId = gInFocusTxtId) {
 
 }
 
-
-
+//When adding a text, first put one of the defualt text boxes back if these were removed
 function onAdd() {
     var hiddenTxtId = getHiddenTxtId()
     if (hiddenTxtId) {
-        // console.log(hiddenTxtId)
         setTxtSettings(hiddenTxtId, 'visible', true)
         var elTxt = document.querySelector(`.meme-txt[data-id="${hiddenTxtId}"]`)
         elTxt.classList.remove('hidden')
         setInFocusTxt(hiddenTxtId)
     } else {
-        addCustomTxtBox()
-        //on delete if class is not-defualt ----> remove it entierly and don't hide
+        //If it's third text box, add a new element
+        addExtraTxtBox()
     }
 }
 
-function addCustomTxtBox() {
+function addExtraTxtBox() {
+    console.log(gCanvasState)
     var txtId = '' + (gCanvasState.txt.length + 1)
     var elTxts = document.querySelectorAll('.meme-txt')
     elTxts = Array.from(elTxts)
@@ -208,44 +167,25 @@ function addCustomTxtBox() {
 
     elTxts.forEach(txt => strHtml += txt.outerHTML)
 
-    strHtml += `<div contenteditable="true" class="meme-txt custom-box" data-id="${txtId}" oninput="onTxtEdit(this)" 
+    strHtml += `<div contenteditable="true" class="meme-txt extra-box" data-id="${txtId}" oninput="onTxtEdit(this)" 
     onmousedown="onStartDrag(event, this)" onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" 
     onmouseout="onStopDrag()" onblur="onEndTyping(this)" onclick="setInFocusTxt(this.dataset.id)"></div>`
 
     strHtml += document.querySelector('#meme-canvas').outerHTML;
+    
+    document.querySelector('.canvas-container').innerHTML = strHtml
 
-    document.querySelector('.canvas-container').innerHTML = strHtml;
-    var newDiv = document.querySelector(`[data-id="${txtId}"]`);
-    // console.log(newDiv);
-
-    var div1 = document.querySelector('[data-id="1"]');
-    var div2 = document.querySelector('[data-id="2"]');
-    div1.addEventListener("touchstart", function () { onStartDrag(event, div1) }, false);
-    div1.addEventListener("touchend", function () { onStopDrag() }, false);
-    div1.addEventListener("touchmove", function () { onDrag(event, div1) }, false);
-    div2.addEventListener("touchstart", function () { onStartDrag(event, div2) }, false);
-    div2.addEventListener("touchend", function () { onStopDrag() }, false);
-    div2.addEventListener("touchmove", function () { onDrag(event, div2) }, false);
-    newDiv.addEventListener("touchstart", function () { onStartDrag(event, newDiv) }, false);
-    newDiv.addEventListener("touchend", function () { onStopDrag() }, false);
-    newDiv.addEventListener("touchmove", function () { onDrag(event, newDiv) }, false);
-    setNewTxt()
+    var elTxtBoxs = document.querySelectorAll('.meme-txt')
+    elTxtBoxs.forEach((txt) => {
+        setDragEvents(txt)
+    })
+    addTxtToModel()
     initCanvas(getImgSrc())
     setInFocusTxt(txtId)
     renderTxt(txtId)
-
-    // console.log(gInFocusTxtId)
-
 }
 
-function getTxtWidth(txt, font) {
-    var canvas = document.querySelector('#help-canvas')
-    var ctx = canvas.getContext('2d')
-    ctx.font = font
-    ctx.fillText(txt, 0, 0);
-    return ctx.measureText(txt).width
-}
-
+// For moving text with keyboard arrows
 function OnKeyMove(ev) {
     switch (ev.code) {
         case 'ArrowLeft':
@@ -262,7 +202,7 @@ function OnKeyMove(ev) {
             break
     }
 }
-
+//moving the text - 4 px at a time
 function moveTxt(direction) {
     var txt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
     switch (direction) {
@@ -285,6 +225,46 @@ function moveTxt(direction) {
     }
 }
 
+function downloadImg(elLink) {
+     //we use divs for editing the text, so before download we need to write the text on the canvas:
+    addCanvasTxt()
+    var canvas = document.querySelector('#meme-canvas')
+    var imgContent = canvas.toDataURL('image/png');
+    elLink.href = imgContent
+    
+}
+
+// Take txt and styles from the div and write text on the canvas itself
+function addCanvasTxt() {
+    var elTxts = document.querySelectorAll('.meme-txt')
+    for (let i = 0; i < elTxts.length; i++) {
+        var txtId = (i + 1) + ''
+        var txt = getTxt(txtId)
+        var font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
+        gCtx.font = font
+        gCtx.fillStyle = getTxtSettings(txtId, 'color')
+        gCtx.strokeStyle = 'black';
+        gCtx.lineWidth = 2
+        gCtx.textBaseline = 'bottom'
+        var xLocation = elTxts[i].offsetLeft
+        var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight
+        if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
+        else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
+        gCtx.strokeText(txt, xLocation, yLocation)
+        gCtx.fillText(txt, xLocation, yLocation);
+    }
+}
+// To get the accurate text siaze, I paint in on a help canvas(hidden) and measure it there
+function getTxtWidth(txt, font) {
+    var canvas = document.querySelector('#help-canvas')
+    var ctx = canvas.getContext('2d')
+    ctx.font = font
+    ctx.fillText(txt, 0, 0);
+    return ctx.measureText(txt).width
+}
+
+
+// Drag
 function onStartDrag(ev, el) {
     gDragState.isDragging = true;
     gDragState.dragStartPos.left = el.offsetLeft;
@@ -292,10 +272,7 @@ function onStartDrag(ev, el) {
     gDragState.clickPos.x = ev.clientX || ev.touches[0].clientX;
     gDragState.clickPos.y = ev.clientY || ev.touches[0].clientY;
 }
-
 function onDrag(ev, el) {
-    console.log(ev);
-    
     ev.preventDefault();
     if (gDragState.isDragging) {
         var clientX = ev.clientX || ev.touches[0].clientX;
@@ -306,24 +283,21 @@ function onDrag(ev, el) {
         el.style.left = (gDragState.dragStartPos.left + xChange) + 'px';
     }
 }
-
 function onStopDrag() {
     gDragState.isDragging = false;
 }
-
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function onBackToGallery() {
-    document.querySelector('section.editor').classList.add('hide');
-    document.querySelector('section.gallery').classList.remove('hide');
-}
 
+//we didn't want the color picker design, so when clicking this color button, it opens a color picker
 function onChangeColor() {
     document.querySelector('.color-picker').click();
 }
 
+
+// Mobile settings menu
 function onShowSettingContainer(ev) {
     ev.stopPropagation();
     document.querySelector('.setting-container').classList.remove('remove-on-mobile');
@@ -334,9 +308,25 @@ function onHideSettingContainer(ev) {
     document.querySelector('.setting-container').classList.add('remove-on-mobile');
 }
 
-//TODO: arrange functions in logical order
 
-//add painter
 
+
+
+
+
+
+
+
+//not in use:
+
+// gCtx.clearRect(0, 0, canvas.width, canvas.height)
+// drawImg()
+// function resizeCanvasForDownload(canvas) {
+//     var imgSrc = getImgSrc()
+//     var imgObj = new Image();
+//     imgObj.src = imgSrc;
+//     canvas.width = imgObj.width
+//     canvas.height = imgObj.height
+// }
 
 

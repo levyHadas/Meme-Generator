@@ -116,13 +116,6 @@ header {
     }
 }
 
-.btns-container {
-    background-color: rgba(46, 46, 46, 0.9);
-    padding: 10px 20px;
-    /* background-color: rgba(33, 47, 54, 0.95); */
-    width: 100%;
-}
-
 .btn-to-gallery {
     width: 48px;
 }
@@ -443,6 +436,13 @@ section.main {
     display: none;
 }
 
+.btns-container {
+    background-color: rgba(0, 0, 0, 0.76);
+    padding: 10px 20px;
+    /* background-color: rgba(33, 47, 54, 0.95); */
+    width: 100%;
+}
+
 .flex-container {
     max-width: 892px;
     margin: 0 auto;
@@ -507,16 +507,16 @@ a.download {
     outline: 3px solid rgba(255, 255, 255, 0.727);
 }
 
-@media (min-width: 692px) {
+@media (max-width: 692px) {
     .meme-txt {
-        outline: 0.5px dashed rgba(255, 222, 212, 0.627);
+        outline: 0.5px dashed rgba(255, 255, 255, 0.627);
     }
     .meme-txt.focus {
-        outline: 0.5px solid rgba(255, 222, 212, 0.727);
+        outline: 0.5px solid rgba(255, 255, 255, 0.727);
     }
 }
 
-.custom-box {
+.extra-box {
     top: 100px;
 }
 
@@ -574,7 +574,7 @@ a.download {
 }
 
 .control-panel .btn {
-    background-color: rgba(13, 13, 13, 0.9);
+    background-color: rgba(13, 13, 13);
 }
 
 .btn-small {
@@ -655,6 +655,7 @@ a.download {
         flex-direction: row;
     }
     .control-panel {
+        width: 200px;
         flex-direction: column;
         padding: 20px 10px; 
         position: relative;
