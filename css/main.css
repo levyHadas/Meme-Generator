@@ -17,6 +17,27 @@ body {
     min-height: 100vh;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f100; 
+    border-radius: 5px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4e2222; 
+    border-radius: 5px;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 h1, h2 {
     font-weight: normal;
 }
@@ -204,6 +225,12 @@ section.main {
     background-color: black;
 }
 
+.shadow:hover {
+    width: 110%;
+    height: 148.5%;
+    transform: translate(-5%, -5%);
+}
+
 .gallery-item {
     position: absolute;
     clip-path: polygon(50% 0, 0 25%, 0 75%, 50% 100%, 100% 75%, 100% 25%);
@@ -316,7 +343,7 @@ section.main {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        border-radius: 20px;
+        border-radius: 5px;
         border: 2px solid  black;
     }
 }
@@ -381,8 +408,6 @@ a.download {
     display: block;
 }
 
-
-
 [data-id="2"] {
     top: 200px;
 }
@@ -390,8 +415,6 @@ a.download {
 [data-id="1"] {
     top: 30px;
 }
-
-
 
 .meme-txt {
     left: 4%; 
@@ -444,13 +467,11 @@ a.download {
     top: 80px;
 }
 
+
 .color-picker {
+    display: none;
     width: 30px;
     height: 30px;
-    background-color: transparent;
-    border: rgb(255, 222, 212);
-    padding-top: 5px; 
-
 }
 
 .modal.tags >* {
@@ -486,6 +507,10 @@ a.download {
 
 .add-delete-lines button, .align-btns button {
     width: 48px;
+    margin: 2px;
+}
+
+.font-options>* {
     margin: 2px;
 }
 
@@ -528,4 +553,12 @@ a.download {
 
 [data-id="2"] {
     top: calc(100% - 72px);
+}
+
+/* .fas option {
+    font-weight: 900;
+} */
+
+.font-picker, .txt-display {
+    width: 58px;
 }

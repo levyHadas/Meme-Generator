@@ -285,7 +285,9 @@ function onBackToGallery() {
     document.querySelector('section.gallery').classList.remove('hide');
 }
 
-
+function onChangeColor() {
+    document.querySelector('.color-picker').click();
+}
 
 
 
