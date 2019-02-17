@@ -391,7 +391,17 @@ a.download {
     outline: 4px solid white;
 }
 
+.custom-box {
+    top: 100px;
+    
+}
 
+.movment-btns {
+    width: 70px;
+    height: 70px;
+    justify-content: space-evenly;
+    align-items: center;
+}
 .color-picker {
     width: 30px;
     height: 30px;
