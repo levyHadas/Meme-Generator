@@ -1,7 +1,22 @@
 'use strict';
 var gCanvasState
-resetCanvasState()
+resetCanvasModel()
 
+function resetCanvasModel() {
+    gCanvasState = {img: 'img/meme-imgs/patrick.jpg',
+                    txt: [createTxtData('1'), createTxtData('2')]}       
+}
+
+function createTxtData(id) {
+    return { id: id,
+            content: '',
+            color: 'white',
+            font: 'impact',
+            size: '3rem',
+            align:'center',
+            visible: true,
+            default: true}
+}
 
 function setImg(src) {
     gCanvasState.img = src
@@ -23,28 +38,15 @@ function getTxtSettings (id, property) {
     return currTxt[property]
 }
 
+function getTxt(txtId) {
+    return getTxtSettings(txtId, 'content')
+}
+
 function findTxtById(id) {
     var txt = gCanvasState.txt.find( (temp) => temp.id === id)
     return txt
 
 }
-
-function resetCanvasState() {
-    gCanvasState = {img: 'img/meme-imgs/patrick.jpg',
-                    txt: [createTxtData('1'), createTxtData('2')]}       
-}
-
-function createTxtData(id) {
-    return { id: id,
-            content: '',
-            color: 'white',
-            font: 'impact',
-            size: '3rem',
-            align:'center',
-            visible: true,
-            default: true}
-}
-
 
 function getVisibaleTxtId() {
     var visibleTxt = gCanvasState.txt.find(txt => txt.visible)
@@ -57,7 +59,7 @@ function getHiddenTxtId() {
     return hiddenTxt.id
 }
 
-function setNewTxt() {
+function addTxtToModel() {
     var id = '' + (gCanvasState.txt.length + 1)
     gCanvasState.txt.push(createTxtData(id))
 }
