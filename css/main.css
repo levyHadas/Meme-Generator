@@ -28,7 +28,14 @@ p {
 
 header {
     height: 130px;
-    background-image: linear-gradient(to bottom, #505050, #202020) ;
+    background-image: linear-gradient(to bottom, #505050, #202020);
+    display: none;
+}
+
+@media (min-width: 692px) {
+    header {
+        display: flex;
+    }
 }
 
 .main-title {
@@ -441,10 +448,11 @@ a.download {
     justify-content: space-evenly;
     padding: 0 20px;
     min-width: 200px;
+    min-height: 200px;
 }
 
 .flex-container {
-    height: 300px;
+    /* height: 300px; */
     justify-content: center;
     flex-direction: column;
 }
@@ -478,4 +486,8 @@ a.download {
 
 .wrap {
     flex-wrap: wrap;
+}
+
+[data-id="2"] {
+    top: calc(100% - 72px);
 }

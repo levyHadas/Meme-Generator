@@ -11,7 +11,7 @@
 </head>
 
 <body onload="init(), initCanvas()" class="flex column" onkeydown="OnKeyMove(event)">
-    <header class="flex align-center space-around">
+    <header class="align-center space-around">
         <h1 class="main-title">Meme Generator</h1>
     </header>
     <section class="gallery main flex column">
@@ -67,7 +67,7 @@
             <span class="flex">
                 <button class="btn btn-download"><a class="download" href="" onclick="downloadImg(this)"
                         download="my-canvas.jpg">Download</a></button>
-                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="addCanvasTxt(), uploadImg(this, event)">
                     <input name="img" id="imgData" type="hidden" />
                     <button type="submit" class="btn publish-btn">Publish</button>
                 </form>
