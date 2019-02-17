@@ -73,7 +73,6 @@ function setRelativeHeights(containerHeight) {
 
 
 function renderTxt(txtId, txt = null) {
-    // if (txtId === '1') var elTextPlace = document.querySelector('[data-id="1"]')
     var elTextPlace = document.querySelector(`[data-id="${txtId}"]`)
     if (txt) elTextPlace.innerText = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
