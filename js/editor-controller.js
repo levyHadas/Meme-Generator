@@ -2,6 +2,7 @@
 var gCtx
 var gNumOfTxtLines = 2
 var gInFocusTxtId = '1'
+var gDragState = {isDragging: false, clickPos: {x: 0, y: 0}, dragStartPos: {left: 0, top: 0}}
 
 function initEditor(meme) {
     var elTxts = document.querySelectorAll('.meme-txt')
@@ -179,9 +180,40 @@ function moveTxt(direction) {
     }
 }
 
+function onStartDrag(ev, el) {
+    console.log('start drag');
+    // debugger;
+    gDragState.isDragging = true;
+    gDragState.dragStartPos.left = el.offsetLeft;
+    gDragState.dragStartPos.top = el.offsetTop;
+    gDragState.clickPos.x = ev.clientX;
+    gDragState.clickPos.y = ev.clientY;
+}
 
+function onDrag(ev, el) {
+    // console.log('drag');
+    // debugger;
+    if (gDragState.isDragging) {
+        var xChange = ev.clientX - gDragState.clickPos.x;
+        var yChange = ev.clientY - gDragState.clickPos.y;
+        // console.log((el.offsetTop - yChange) + '');
+        
+        el.style.top = (gDragState.dragStartPos.top + yChange) + 'px';
+        el.style.left = (gDragState.dragStartPos.left + xChange) + 'px';
+        
+        // console.log(xChange);
+    }
+}
 
+function onStopDrag(el) {
+    console.log('stop drag');
 
+    gDragState.isDragging = false;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
 
 

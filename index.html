@@ -80,11 +80,11 @@
         </div>
         <div class="flex-container flex">
             <div class="canvas-container">
-                <div contenteditable="true" class="meme-txt txt-1" data-id="1" oninput="onTextEdit(this)"
-                    onblur="onEndTyping(this)">
+                <div contenteditable="true" class="meme-txt txt-1" data-id="1" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
+                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)">
                 </div>
-                <div contenteditable="true" class="meme-txt txt-2" data-id="2" oninput="onTextEdit(this)"
-                onblur="onEndTyping(this)">
+                <div contenteditable="true" class="meme-txt txt-2" data-id="2" oninput="onTextEdit(this)" onmousedown="onStartDrag(event, this)"
+                    onmouseup="onStopDrag()" onmousemove="onDrag(event, this)" onmouseout="onStopDrag()" onblur="onEndTyping(this)">
                 </div>
                 <canvas id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"></canvas>
             </div>
