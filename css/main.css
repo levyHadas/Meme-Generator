@@ -441,10 +441,11 @@ a.download {
     justify-content: space-evenly;
     padding: 0 20px;
     min-width: 200px;
+    min-height: 200px;
 }
 
 .flex-container {
-    height: 300px;
+    /* height: 300px; */
     justify-content: center;
     flex-direction: column;
 }
