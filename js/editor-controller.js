@@ -45,12 +45,11 @@ function drawImg() {
     }
 }
 
-
 function resizeCanvas(canvas) {
     var elCanvasContainer = document.querySelector('.canvas-container')
     var containerHeight = setCanvasContainerSize(elCanvasContainer)
-    canvas.width = elCanvasContainer.offsetWidth
-    canvas.height = containerHeight
+    canvas.width = elCanvasContainer.offsetWidth;
+    canvas.height = containerHeight;
     setRelativeHeights(containerHeight)
 }
 
@@ -60,6 +59,7 @@ function setCanvasContainerSize(elCanvasContainer) {
     imgObj.src = imgSrc;
     //we want to make the img as big as we can, will still in ratio
     //since it's canvas we don't have features like object-fit
+    // debugger
     var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
     var height = elCanvasContainer.clientWidth * ratio
     elCanvasContainer.style.height = `${height}px`
@@ -250,7 +250,6 @@ function moveTxt(direction) {
 }
 
 function onStartDrag(ev, el) {
-    console.log('start drag');
     gDragState.isDragging = true;
     gDragState.dragStartPos.left = el.offsetLeft;
     gDragState.dragStartPos.top = el.offsetTop;
@@ -267,9 +266,7 @@ function onDrag(ev, el) {
     }
 }
 
-function onStopDrag(el) {
-    console.log('stop drag');
-
+function onStopDrag() {
     gDragState.isDragging = false;
 }
 
