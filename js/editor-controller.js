@@ -67,7 +67,7 @@ function setCanvasContainerSize(elCanvasContainer) {
 }
 
 function setRelativeHeights(containerHeight) {
-    document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px'
+    // document.querySelector('[data-id="2"]').style.top = (0.85 * containerHeight) + 'px'
     // document.querySelector('.flex-container').style.height = (containerHeight) + 'px'
 }
 

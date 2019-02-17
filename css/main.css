@@ -28,7 +28,14 @@ p {
 
 header {
     height: 130px;
-    background-image: linear-gradient(to bottom, #505050, #202020) ;
+    background-image: linear-gradient(to bottom, #505050, #202020);
+    display: none;
+}
+
+@media (min-width: 692px) {
+    header {
+        display: flex;
+    }
 }
 
 .main-title {
@@ -479,4 +486,8 @@ a.download {
 
 .wrap {
     flex-wrap: wrap;
+}
+
+[data-id="2"] {
+    top: calc(100% - 72px);
 }
