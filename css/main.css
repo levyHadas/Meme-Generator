@@ -134,6 +134,11 @@ section.main {
     z-index: 1;
 }
 
+.autocomplete-item:hover {
+    background-color: rgb(49, 49, 255);
+    color: white;
+}
+
 .img-gallery {
     max-width: 100%;
     flex: 1;
@@ -386,7 +391,7 @@ a.download {
     left: 4%; 
     outline: 3px dashed rgba(255, 255, 255, 0.627);
     font-size: 2rem;
-    text-shadow: 0 0 1px black;
+    -webkit-text-stroke: 1px black;
     line-height: 48px;
     margin: 0;
     position: absolute;
@@ -404,11 +409,35 @@ a.download {
 }
 
 .movment-btns {
-    width: 70px;
-    height: 70px;
-    justify-content: space-evenly;
-    align-items: center;
+    width: 120px;
+    height: 120px;
+    position: relative;
 }
+
+.movment-btns>:nth-child(1) {
+    position: absolute;
+    left: 40px;
+    top: 0;
+}
+
+.movment-btns>:nth-child(2) {
+    position: absolute;
+    left: 0;
+    top: 40px;
+}
+
+.movment-btns>:nth-child(3) {
+    position: absolute;
+    left: 80px;
+    top: 40px;
+}
+
+.movment-btns>:nth-child(4) {
+    position: absolute;
+    left: 40px;
+    top: 80px;
+}
+
 .color-picker {
     width: 30px;
     height: 30px;
@@ -432,8 +461,6 @@ a.download {
     cursor: pointer;
 }
 
-
-
 #help-canvas {
     display: none;
 }
@@ -451,6 +478,11 @@ a.download {
     min-height: 200px;
 }
 
+.add-delete-lines button, .align-btns button {
+    width: 48px;
+    margin: 2px;
+}
+
 .flex-container {
     /* height: 300px; */
     justify-content: center;
@@ -458,8 +490,8 @@ a.download {
 }
 
 .btn-small {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     font-size: 1rem;
     padding: 2px;
 }

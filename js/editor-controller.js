@@ -139,7 +139,7 @@ function addCanvasTxt() {
         gCtx.font = font
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
         gCtx.shadowColor = '#000000'
-        gCtx.shadowBlur = 1;
+        gCtx.shadowBlur = 2;
         gCtx.textBaseline = 'bottom'
         var xLocation = elTxts[i].offsetLeft
         var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight
