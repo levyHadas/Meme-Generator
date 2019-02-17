@@ -100,7 +100,6 @@ section.main {
 }
 
 .search-input-container {
-    overflow: hidden;
     position: relative;
     width: 160px;
 }
@@ -277,12 +276,7 @@ section.main {
     display: none;
 }
 
-.delete {
-    /* display: block;
-    position: absolute;
-    top:0;
-    right:0; */
-}
+
 
 @media (min-width: 892px) {
     .modal h2 {
@@ -320,7 +314,7 @@ section.main {
 .canvas-container {
     position: relative;
     width: 100%;
-    max-width: 700px;
+    max-width: 692px;
 }
 
 .btn {
@@ -393,7 +387,7 @@ a.download {
     text-align: center;
     width: 90%;
 }
-.meme-txt:focus {
+.meme-txt.focus {
     outline: 4px solid white;
 }
 
@@ -433,9 +427,10 @@ a.download {
 
 .control-panel {
     background-color: rgb(122, 62, 62);
-    flex-basis: 20%;
+    /* flex-basis: 20%; */
     justify-content: space-evenly;
     padding: 0 20px;
+    min-width: 200px;
 }
 
 .flex-container {
@@ -459,7 +454,7 @@ a.download {
     width: 100px; 
 }
 
-@media (min-width: 692px) {
+@media (min-width: 892px) {
     .flex-container {
         flex-direction: row;
     }
@@ -469,4 +464,8 @@ a.download {
         /* top: 40px; */
         position: relative
     }
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
