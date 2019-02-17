@@ -37,11 +37,11 @@ function initCanvas(src = 'img/meme-imgs/patrick.jpg') {
 
 function drawImg() {
     var imgSrc = getImgSrc()
-    document.querySelector('.canvas-img').src = imgSrc
-    var elImg = document.querySelector('.canvas-img')
+    var img = new Image()
+    img.src = imgSrc
     var canvas = document.querySelector('#meme-canvas')
-    elImg.onload = function () {
-        gCtx.drawImage(elImg, 0, 0, canvas.width, canvas.height)
+    img.onload = function () {
+        gCtx.drawImage(img, 0, 0, canvas.width, canvas.height)
     }
 }
 

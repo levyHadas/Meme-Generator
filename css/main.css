@@ -381,7 +381,7 @@ a.download {
 
 .meme-txt {
     left: 4%; 
-    outline: 4px dashed rgba(255, 255, 255, 0.627);
+    outline: 3px dashed rgba(255, 255, 255, 0.627);
     font-size: 2rem;
     text-shadow: 0 0 1px black;
     line-height: 48px;
@@ -392,7 +392,7 @@ a.download {
     width: 90%;
 }
 .meme-txt.focus {
-    outline: 4px solid white;
+    outline: 3px solid rgba(255, 255, 255, 0.727);
 }
 
 .custom-box {
