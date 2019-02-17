@@ -231,6 +231,9 @@ function downloadImg(elLink) {
     var canvas = document.querySelector('#meme-canvas')
     var imgContent = canvas.toDataURL('image/png');
     elLink.href = imgContent
+    // Now remove the canvas text and re draw the image
+    gCtx.clearRect(0, 0, canvas.width, canvas.height)
+    drawImg()
     
 }
 
@@ -319,8 +322,7 @@ function onHideSettingContainer(ev) {
 
 //not in use:
 
-// gCtx.clearRect(0, 0, canvas.width, canvas.height)
-// drawImg()
+
 // function resizeCanvasForDownload(canvas) {
 //     var imgSrc = getImgSrc()
 //     var imgObj = new Image();
