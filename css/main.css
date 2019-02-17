@@ -96,12 +96,7 @@ section.main {
     margin: 0 0 10px;
 }
 
-.btns-container {
-    /* top: 40px; */
-    padding: 10px 20px;
-    background-color: rgba(33, 47, 54, 0.95);
-    width: 100%;
-}
+
 
 @media (min-width: 892px) {
     .top-bar {
@@ -386,7 +381,6 @@ section.main {
 
 .btn {
     border: none;
-    background-color: rgb(22, 34, 39, 0.77);
     border-radius: 5px;
     color: white;
     height: 48px;
@@ -394,12 +388,18 @@ section.main {
     cursor: pointer;
     outline: none;
     font-size: 1rem;
-    border: 1.5px solid rgba(255, 255, 255, 0.14)
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    background-color: rgba(22, 34, 38, 0.62);
 }
 
-/* .control-panel .btn {
-    background-color: rgba(46, 46, 46, 0.62);
-} */
+.btns-container {
+    background-color: rgba(46, 46, 46, 0.9);
+    padding: 10px 20px;
+    /* background-color: rgba(33, 47, 54, 0.95); */
+    width: 100%;
+}
+
+
 
 .btn-to-gallery {
     width: 48px;
@@ -468,8 +468,6 @@ a.download {
     width: 120px;
     height: 120px;
     position: relative;
-    /* flex-basis: 50%; */
-    flex-grow: 0.3;
 }
 
 .movment-btns>:nth-child(1) {
@@ -526,11 +524,14 @@ a.download {
 }
 
 .control-panel {
-    background-color: rgba(33, 47, 54, 1);
-    background-color: rgba(33, 47, 54, 0.95);
     padding: 10px 10px;
     min-width: 200px;
+    background-color: rgba(0, 0, 0, 0.76);
 }
+.control-panel .btn {
+    background-color: rgba(13, 13, 13, 0.9);
+}
+
 
 .add-delete-lines button, .align-btns button {
     width: 48px;
@@ -572,19 +573,25 @@ a.download {
     .control-panel {
         flex-direction: column;
         padding: 20px 10px; 
-        /* top: 40px; */
         position: relative
     }
     .setting-container {
         flex-direction:  column;
     }
-    .control-panel .btn {
-        background-color: rgba(46, 46, 46, 0.62);
-    }
+
     .control-panel {
-        background-color: rgb(38, 38, 38, 0.9);
+        background-color: rgba(29, 29, 29, 0.8);
         padding: 10px 10px;
         min-width: 200px;
+    }
+    .btns-container {
+        background-color: rgba(33, 47, 54, 0.95);
+    }
+    .btn {
+        background-color: rgb(22, 34, 39, 0.77);
+    }
+    .control-panel .btn {
+        background-color: rgba(13, 13, 13, 0.36);
     }
 
 }
