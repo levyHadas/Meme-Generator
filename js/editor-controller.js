@@ -5,14 +5,19 @@ var gDragState = { isDragging: false, clickPos: { x: 0, y: 0 }, dragStartPos: { 
 var gInFocusTxtId
 
 function initEditor(meme) {
-    var elTxts = document.querySelectorAll('.meme-txt')
-    elTxts.forEach(txt => txt.classList.remove('hidden'))
     var imgSrc = meme.src
-    var txts = document.querySelectorAll('.meme-txt')
-    txts.forEach((txt) => txt.innerText = '')
     resetCanvasState()
+    resetTxtBoxs()
     initCanvas(imgSrc)
     setInFocusTxt('1')
+}
+
+function resetTxtBoxs() {
+    var elTxts = document.querySelectorAll('.meme-txt')
+    elTxts.forEach(txt => txt.classList.remove('hidden'))
+    elTxts.forEach((txt) => txt.innerText = '')
+    var elTxtBoxs = document.querySelectorAll('.custom-box')
+    elTxtBoxs.forEach(box => box.outerHTML = '')
 }
 
 function setInFocusTxt(txtId) {
@@ -59,7 +64,6 @@ function setCanvasContainerSize(elCanvasContainer) {
     imgObj.src = imgSrc;
     //we want to make the img as big as we can, will still in ratio
     //since it's canvas we don't have features like object-fit
-    // debugger
     var ratio = (imgObj.height < imgObj.width) ? imgObj.height / imgObj.width : imgObj.width / imgObj.height
     var height = elCanvasContainer.clientWidth * ratio
     elCanvasContainer.style.height = `${height}px`
@@ -145,23 +149,25 @@ function addCanvasTxt() {
     }
 }
 
-function onDelete() {
-    var elTxt = document.querySelector(`.meme-txt[data-id="${gInFocusTxtId}"]`)
-    if (gInFocusTxtId > 2) { //if this is a custom txt box, remove it
+function onDelete(inFocusId = gInFocusTxtId) {
+    var elTxt = document.querySelector(`.meme-txt[data-id="${inFocusId}"]`)
+    if (inFocusId > 2) { //if this is a custom txt box, remove it
         elTxt.outerHTML = ''
-        deleteTxt(gInFocusTxtId)
+        deleteTxt(inFocusId)
     } else {
         elTxt.classList.add('hidden')
         elTxt.classList.remove('focus')
         elTxt.innerText = ''
-        setTxtSettings(gInFocusTxtId, 'content', '')
-        setTxtSettings(gInFocusTxtId, 'visible', false)
+        setTxtSettings(inFocusId, 'content', '')
+        setTxtSettings(inFocusId, 'visible', false)
     }
     //set focus to displayed text
     var remainTxtId = getVisibaleTxtId()
     if (remainTxtId) setInFocusTxt(remainTxtId)
 
 }
+
+
 
 function onAdd() {
     var hiddenTxtId = getHiddenTxtId()
