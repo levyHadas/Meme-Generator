@@ -13,11 +13,15 @@ function initEditor(meme) {
 }
 
 function resetTxtBoxs() {
-    var elTxts = document.querySelectorAll('.meme-txt')
-    elTxts.forEach(txt => txt.classList.remove('hidden'))
-    elTxts.forEach((txt) => txt.innerText = '')
-    var elTxtBoxs = document.querySelectorAll('.custom-box')
-    elTxtBoxs.forEach(box => box.outerHTML = '')
+    var elTxtBoxs = document.querySelectorAll('.meme-txt')
+    elTxtBoxs.forEach(txt => txt.classList.remove('hidden'))
+    elTxtBoxs.forEach((txt) => {txt.innerText = ''
+        txt.style.top = ''
+        txt.style.left = ''
+    })
+
+    var elAddedTxtBoxs = document.querySelectorAll('.custom-box')
+    elAddedTxtBoxs.forEach(box => box.outerHTML = '')
 }
 
 function setInFocusTxt(txtId) {
@@ -138,13 +142,13 @@ function addCanvasTxt() {
         var font = `${getTxtSettings(txtId, 'size')} ${getTxtSettings(txtId, 'font')}`
         gCtx.font = font
         gCtx.fillStyle = getTxtSettings(txtId, 'color')
-        gCtx.shadowColor = '#000000'
-        gCtx.shadowBlur = 1;
+        gCtx.strokeStyle = 'black';
         gCtx.textBaseline = 'bottom'
         var xLocation = elTxts[i].offsetLeft
         var yLocation = elTxts[i].offsetTop + elTxts[i].clientHeight
         if (getTxtSettings(txtId, 'align') === 'center') xLocation += elTxts[i].offsetWidth / 2 - getTxtWidth(txt, font) / 2
         else if (getTxtSettings(txtId, 'align') === 'right') xLocation += elTxts[i].offsetWidth - getTxtWidth(txt, font)
+        gCtx.strokeText (txt, xLocation, yLocation)
         gCtx.fillText(txt, xLocation, yLocation);
     }
 }
@@ -291,13 +295,7 @@ function onBackToGallery() {
 
 //TODO: arrange functions in logical order
 
-
-
-
-
-//make in focus element always border focus
-//change font size to range
 //add painter
-//more than 2 text
+
 
 

@@ -37,10 +37,10 @@ header {
         display: flex;
     }
     .meme-txt {
-        outline: 1px dashed rgba(255, 222, 212, 0.627);
+        outline: 0.5px dashed rgba(255, 222, 212, 0.627);
     }
     .meme-txt.focus {
-        outline: 1px solid rgba(255, 222, 212, 0.727);
+        outline: 0.5px solid rgba(255, 222, 212, 0.727);
     }
 }
 
@@ -450,7 +450,6 @@ a.download {
 
 .control-panel {
     background-color: rgb(122, 62, 62);
-    /* flex-basis: 20%; */
     justify-content: space-evenly;
     padding: 0 20px;
     min-width: 200px;
@@ -458,7 +457,6 @@ a.download {
 }
 
 .flex-container {
-    /* height: 300px; */
     justify-content: center;
     flex-direction: column;
 }
@@ -477,6 +475,10 @@ a.download {
 .font-picker {
     width: 100px; 
 }
+/* TODO: place holder */
+/* .meme-txt:empty:not(:focus):before{
+    content:attr(data-text)
+} */
 
 @media (min-width: 892px) {
     .flex-container {
