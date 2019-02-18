@@ -502,7 +502,9 @@ a.download {
     padding: 0;
     text-align: center;
     width: 90%;
+    white-space: nowrap;
 }
+
 .meme-txt.focus {
     outline: 3px solid rgba(255, 255, 255, 0.727);
 }
