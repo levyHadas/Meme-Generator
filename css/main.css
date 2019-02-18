@@ -511,10 +511,10 @@ a.download {
 
 @media (max-width: 692px) {
     .meme-txt {
-        outline: 0.5px dashed rgba(255, 255, 255, 0.627);
+        outline: 1px dashed rgba(255, 255, 255, 0.627);
     }
     .meme-txt.focus {
-        outline: 0.5px solid rgba(255, 255, 255, 0.727);
+        outline: 1px solid rgba(255, 255, 255, 0.727);
     }
 }
 
