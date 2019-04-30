@@ -63,7 +63,7 @@ hr {
 /* HEADER */
 
 header {
-    height: 130px;
+    height: 70px;
     background-image: linear-gradient(to bottom, #505050, #202020);
     display: none;
 }
@@ -77,7 +77,7 @@ header {
 .main-title {
     color: white;
     font-family: cursive;
-    font-size: 3rem; 
+    font-size: 2.5rem; 
 }
 
 /* MAIN SECTION */
@@ -492,21 +492,20 @@ a.download {
 }
 
 .meme-txt {
-    left: 4%; 
+    left: 50%; 
     outline: 3px dashed rgba(255, 255, 255, 0.627);
-    font-size: 2rem;
+    font-size: 1.8rem;
     -webkit-text-stroke: 1.2px black;
-    line-height: 48px;
-    margin: 0;
+    /* line-height: 48px; */
     position: absolute;
-    padding: 0;
     text-align: center;
-    width: 90%;
-    white-space: nowrap;
+    min-width: 50px;
+    max-width: 90%;
+    padding: 5px;
 }
 
 .meme-txt.focus {
-    outline: 3px solid rgba(255, 255, 255, 0.727);
+    outline: 3.5px solid rgba(255, 255, 255, 0.727);
 }
 
 @media (max-width: 692px) {
@@ -514,7 +513,7 @@ a.download {
         outline: 1px dashed rgba(255, 255, 255, 0.627);
     }
     .meme-txt.focus {
-        outline: 1px solid rgba(255, 255, 255, 0.727);
+        outline: 1.5px solid rgba(255, 255, 255, 0.727);
     }
 }
 

@@ -27,7 +27,6 @@ function getImgSrc() {
 }
 
 function setTxtSettings(id, property, value) {
-    console.log(id)
     var currTxt = findTxtById(id)
     if (property !== 'size') currTxt[property] = value
     else  currTxt[property] = value + 'px'

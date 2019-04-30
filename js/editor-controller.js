@@ -101,9 +101,20 @@ function renderTxt(txtId, txt = null) {
     if (txt) elTextPlace.innerText = txt;
     elTextPlace.style.color = getTxtSettings(txtId, 'color');
     elTextPlace.style.font = `${getTxtSettings(txtId, 'size')}/100% ${getTxtSettings(txtId, 'font')}`;
-    elTextPlace.style.height = getTxtSettings(txtId, 'size');
-    elTextPlace.style.textAlign = getTxtSettings(txtId, 'align');
+    var textAlign = getTxtSettings(txtId, 'align');
+    switch (textAlign) {
+        case 'center':
+            elTextPlace.style.left = `calc(50% - ${elTextPlace.clientWidth/2}px)`;
+            break;
+        case 'left':
+            elTextPlace.style.left = '40px';
+            break;
+            case 'right':
+            elTextPlace.style.left = `calc(95% - ${elTextPlace.clientWidth}px)`;
+            break;
+    }
 }
+
 
 function onEndTyping(elTxtInput) {
     var txtId = elTxtInput.dataset.id
@@ -159,7 +170,6 @@ function onAdd() {
 }
 
 function addExtraTxtBox() {
-    console.log(gCanvasState)
     var txtId = '' + (gCanvasState.txt.length + 1)
     var elTxts = document.querySelectorAll('.meme-txt')
     elTxts = Array.from(elTxts)
